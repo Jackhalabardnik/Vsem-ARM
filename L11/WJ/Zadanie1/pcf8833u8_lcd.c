@@ -7,14 +7,19 @@
 #define LCD_RESET_LOW     PIOA_CODR   = BIT2
 #define LCD_RESET_HIGH    PIOA_SODR   = BIT2
 
+/*  Funkcja do wyœwietlania obrazu na ekranie LCD
+*   num - numer obrazu (1 lub 2)
+*   Nic nie zwraca
+*/
 void show_photo(int num) {
-  LCDClearScreen();
+  LCDClearScreen();           // Czyszczê ekran
 
-  WriteSpiCommand(DISPLAYOFF);
+  WriteSpiCommand(DISPLAYOFF);  //Wy³¹czam ekran
 
-  WriteSpiCommand(MEMWRITE);
+  WriteSpiCommand(MEMWRITE);    //Zaczynam zapis do pamiêci wyœwietlacza
 
-  for (int j = 0; j < sizeof(bmp); j++) {
+  // Zapisujê obraz do pamiêci wyœwwietlacza
+  for (int j = 0; j < sizeof(bmp); j++) { 
       if(num == 1) {
         WriteSpiData(bmp[j]);
       }
@@ -24,7 +29,7 @@ void show_photo(int num) {
       }   
     }
 
-  WriteSpiCommand(DISPLAYON);
+  WriteSpiCommand(DISPLAYON); // W³¹czam ekran
 }
 
 void Delaya(unsigned long a) { while (--a != 0); }

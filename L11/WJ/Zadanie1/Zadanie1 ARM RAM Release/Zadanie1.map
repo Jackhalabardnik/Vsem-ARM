@@ -2531,7 +2531,7 @@ Linker script and memory map
                 0x0000000000000001                . = ASSERT (((__init_rodata_start__ == __init_rodata_end__) || ((__init_rodata_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .init_rodata is too large to fit in SRAM memory segment)
                 0x0000000000200330                __text_load_start__ = ALIGN (__init_rodata_end__, 0x4)
 
-.text           0x0000000000200330     0x11c0
+.text           0x0000000000200330     0x1200
                 0x0000000000200330                __text_start__ = .
  *(.text .text.* .glue_7t .glue_7 .gnu.linkonce.t.* .gcc_except_table .ARM.extab* .gnu.linkonce.armextab.*)
  .glue_7        0x0000000000200330        0x0 linker stubs
@@ -2547,90 +2547,90 @@ Linker script and memory map
  .text          0x00000000002004a0       0x60 Zadanie1 ARM RAM Release/AIC_irq_handler.o
                 0x00000000002004a0                irq_handler
                 0x00000000002004e0                fiq_handler
- .text.image_with_text
-                0x0000000000200500        0x4 Zadanie1 ARM RAM Release/main.o
-                0x0000000000200500                image_with_text
  .text.animation
-                0x0000000000200504       0x14 Zadanie1 ARM RAM Release/main.o
-                0x0000000000200504                animation
+                0x0000000000200500       0x14 Zadanie1 ARM RAM Release/main.o
+                0x0000000000200500                animation
  .text.about_author
-                0x0000000000200518       0x64 Zadanie1 ARM RAM Release/main.o
-                0x0000000000200518                about_author
- .text.image_1  0x000000000020057c       0x14 Zadanie1 ARM RAM Release/main.o
-                0x000000000020057c                image_1
- .text.image_2  0x0000000000200590       0x14 Zadanie1 ARM RAM Release/main.o
-                0x0000000000200590                image_2
- .text.square   0x00000000002005a4       0x3c Zadanie1 ARM RAM Release/main.o
-                0x00000000002005a4                square
- .text.circle   0x00000000002005e0       0x24 Zadanie1 ARM RAM Release/main.o
-                0x00000000002005e0                circle
+                0x0000000000200514       0x64 Zadanie1 ARM RAM Release/main.o
+                0x0000000000200514                about_author
+ .text.image_with_text
+                0x0000000000200578       0x44 Zadanie1 ARM RAM Release/main.o
+                0x0000000000200578                image_with_text
+ .text.image_1  0x00000000002005bc       0x14 Zadanie1 ARM RAM Release/main.o
+                0x00000000002005bc                image_1
+ .text.image_2  0x00000000002005d0       0x14 Zadanie1 ARM RAM Release/main.o
+                0x00000000002005d0                image_2
+ .text.square   0x00000000002005e4       0x3c Zadanie1 ARM RAM Release/main.o
+                0x00000000002005e4                square
+ .text.circle   0x0000000000200620       0x24 Zadanie1 ARM RAM Release/main.o
+                0x0000000000200620                circle
  .text.triangle
-                0x0000000000200604       0x64 Zadanie1 ARM RAM Release/main.o
-                0x0000000000200604                triangle
- .text.trapeze  0x0000000000200668       0x7c Zadanie1 ARM RAM Release/main.o
-                0x0000000000200668                trapeze
+                0x0000000000200644       0x64 Zadanie1 ARM RAM Release/main.o
+                0x0000000000200644                triangle
+ .text.trapeze  0x00000000002006a8       0x7c Zadanie1 ARM RAM Release/main.o
+                0x00000000002006a8                trapeze
  .text.display_menu
-                0x00000000002006e4       0xc0 Zadanie1 ARM RAM Release/main.o
-                0x00000000002006e4                display_menu
+                0x0000000000200724       0xc0 Zadanie1 ARM RAM Release/main.o
+                0x0000000000200724                display_menu
  .text.navigate_menu
-                0x00000000002007a4      0x14c Zadanie1 ARM RAM Release/main.o
-                0x00000000002007a4                navigate_menu
- .text.delay    0x00000000002008f0       0x2c Zadanie1 ARM RAM Release/main.o
-                0x00000000002008f0                delay
+                0x00000000002007e4      0x14c Zadanie1 ARM RAM Release/main.o
+                0x00000000002007e4                navigate_menu
+ .text.delay    0x0000000000200930       0x2c Zadanie1 ARM RAM Release/main.o
+                0x0000000000200930                delay
  .text.interrupt_init
-                0x000000000020091c       0x6c Zadanie1 ARM RAM Release/main.o
-                0x000000000020091c                interrupt_init
- .text.main     0x0000000000200988       0x90 Zadanie1 ARM RAM Release/main.o
-                0x0000000000200988                main
- .text.Delay_   0x0000000000200a18       0x24 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200a18                Delay_
+                0x000000000020095c       0x6c Zadanie1 ARM RAM Release/main.o
+                0x000000000020095c                interrupt_init
+ .text.main     0x00000000002009c8       0x90 Zadanie1 ARM RAM Release/main.o
+                0x00000000002009c8                main
+ .text.Delay_   0x0000000000200a58       0x24 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200a58                Delay_
  .text.WriteSpiCommand
-                0x0000000000200a3c       0x20 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200a3c                WriteSpiCommand
+                0x0000000000200a7c       0x20 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200a7c                WriteSpiCommand
  .text.WriteSpiData
-                0x0000000000200a5c       0x20 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200a5c                WriteSpiData
+                0x0000000000200a9c       0x20 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200a9c                WriteSpiData
  .text.LCDSettings
-                0x0000000000200a7c      0x130 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200a7c                LCDSettings
- .text.InitLCD  0x0000000000200bac       0x8c Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200bac                InitLCD
+                0x0000000000200abc      0x130 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200abc                LCDSettings
+ .text.InitLCD  0x0000000000200bec       0x8c Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200bec                InitLCD
  .text.LCDClearScreen
-                0x0000000000200c38       0x70 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200c38                LCDClearScreen
+                0x0000000000200c78       0x70 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200c78                LCDClearScreen
  .text.show_photo
-                0x0000000000200ca8       0x7c Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200ca8                show_photo
+                0x0000000000200ce8       0x7c Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200ce8                show_photo
  .text.LCDSetPixel
-                0x0000000000200d24       0x78 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200d24                LCDSetPixel
+                0x0000000000200d64       0x78 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200d64                LCDSetPixel
  .text.LCDSetLine
-                0x0000000000200d9c       0xec Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200d9c                LCDSetLine
+                0x0000000000200ddc       0xec Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200ddc                LCDSetLine
  .text.LCDSetRect
-                0x0000000000200e88      0x14c Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200e88                LCDSetRect
+                0x0000000000200ec8      0x14c Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000200ec8                LCDSetRect
  .text.LCDSetCircle
-                0x0000000000200fd4      0x154 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000200fd4                LCDSetCircle
+                0x0000000000201014      0x154 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000201014                LCDSetCircle
  .text.LCDPutChar
-                0x0000000000201128      0x1b4 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000201128                LCDPutChar
+                0x0000000000201168      0x1b4 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000201168                LCDPutChar
  .text.LCDPutStr
-                0x00000000002012dc       0x64 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x00000000002012dc                LCDPutStr
+                0x000000000020131c       0x64 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x000000000020131c                LCDPutStr
  .text.libc.strcat
-                0x0000000000201340       0xe8 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 4.8/lib/libc_v4t_a_le_eabi.a(libc2.o)
-                0x0000000000201340                strcat
+                0x0000000000201380       0xe8 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 4.8/lib/libc_v4t_a_le_eabi.a(libc2.o)
+                0x0000000000201380                strcat
  .text.libc.memset
-                0x0000000000201428       0xa4 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 4.8/lib/libc_v4t_a_le_eabi.a(libc2_asm.o)
-                0x0000000000201428                memset
+                0x0000000000201468       0xa4 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 4.8/lib/libc_v4t_a_le_eabi.a(libc2_asm.o)
+                0x0000000000201468                memset
  .text.libarm.libarm_set_irq
-                0x00000000002014cc       0x24 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 4.8/lib/libarm_v4t_a_le_eabi.a(libarm.o)
-                0x00000000002014cc                libarm_set_irq
-                0x00000000002014f0                __text_end__ = (__text_start__ + SIZEOF (.text))
-                0x00000000000011c0                __text_size__ = SIZEOF (.text)
-                0x00000000002014f0                __text_load_end__ = __text_end__
+                0x000000000020150c       0x24 C:/Program Files/Rowley Associates Limited/CrossWorks for ARM 4.8/lib/libarm_v4t_a_le_eabi.a(libarm.o)
+                0x000000000020150c                libarm_set_irq
+                0x0000000000201530                __text_end__ = (__text_start__ + SIZEOF (.text))
+                0x0000000000001200                __text_size__ = SIZEOF (.text)
+                0x0000000000201530                __text_load_end__ = __text_end__
 
 .vfp11_veneer   0x0000000100000000        0x0
  .vfp11_veneer  0x0000000100000000        0x0 linker stubs
@@ -2641,240 +2641,243 @@ Linker script and memory map
 .iplt           0x0000000100000000        0x0
  .iplt          0x0000000100000000        0x0 Zadanie1 ARM RAM Release/crt0.o
                 0x0000000000000001                . = ASSERT (((__text_start__ == __text_end__) || ((__text_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .text is too large to fit in SRAM memory segment)
-                0x00000000002014f0                __dtors_load_start__ = ALIGN (__text_end__, 0x4)
+                0x0000000000201530                __dtors_load_start__ = ALIGN (__text_end__, 0x4)
 
-.dtors          0x00000000002014f0        0x0
-                0x00000000002014f0                __dtors_start__ = .
+.dtors          0x0000000000201530        0x0
+                0x0000000000201530                __dtors_start__ = .
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.fini_array)
  *(SORT_BY_NAME(.fini_array.*))
-                0x00000000002014f0                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
+                0x0000000000201530                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
                 0x0000000000000000                __dtors_size__ = SIZEOF (.dtors)
-                0x00000000002014f0                __dtors_load_end__ = __dtors_end__
+                0x0000000000201530                __dtors_load_end__ = __dtors_end__
                 0x0000000000000001                . = ASSERT (((__dtors_start__ == __dtors_end__) || ((__dtors_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .dtors is too large to fit in SRAM memory segment)
-                0x00000000002014f0                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
+                0x0000000000201530                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
 
-.ctors          0x00000000002014f0        0x0
-                0x00000000002014f0                __ctors_start__ = .
+.ctors          0x0000000000201530        0x0
+                0x0000000000201530                __ctors_start__ = .
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
  *(.init_array)
  *(SORT_BY_NAME(.init_array.*))
-                0x00000000002014f0                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
+                0x0000000000201530                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
                 0x0000000000000000                __ctors_size__ = SIZEOF (.ctors)
-                0x00000000002014f0                __ctors_load_end__ = __ctors_end__
+                0x0000000000201530                __ctors_load_end__ = __ctors_end__
                 0x0000000000000001                . = ASSERT (((__ctors_start__ == __ctors_end__) || ((__ctors_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .ctors is too large to fit in SRAM memory segment)
-                0x00000000002014f0                __data_load_start__ = ALIGN (__ctors_end__, 0x4)
+                0x0000000000201530                __data_load_start__ = ALIGN (__ctors_end__, 0x4)
 
-.data           0x00000000002014f0      0x19c
-                0x00000000002014f0                __data_start__ = .
+.data           0x0000000000201530      0x19c
+                0x0000000000201530                __data_start__ = .
  *(.data .data.* .gnu.linkonce.d.*)
  .data.actual_node
-                0x00000000002014f0        0x4 Zadanie1 ARM RAM Release/main.o
-                0x00000000002014f0                actual_node
+                0x0000000000201530        0x4 Zadanie1 ARM RAM Release/main.o
+                0x0000000000201530                actual_node
  .data.main_menu_texts
-                0x00000000002014f4       0x14 Zadanie1 ARM RAM Release/main.o
-                0x00000000002014f4                main_menu_texts
- .data.menu_1   0x0000000000201508       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201508                menu_1
+                0x0000000000201534       0x14 Zadanie1 ARM RAM Release/main.o
+                0x0000000000201534                main_menu_texts
+ .data.menu_1   0x0000000000201548       0x20 Zadanie1 ARM RAM Release/main.o
+                0x0000000000201548                menu_1
  .data.menu_1_1
-                0x0000000000201528       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201528                menu_1_1
- .data.menu_1_2
-                0x0000000000201548       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201548                menu_1_2
- .data.menu_1_3
                 0x0000000000201568       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201568                menu_1_3
- .data.menu_2   0x0000000000201588       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201588                menu_2
- .data.menu_3   0x00000000002015a8       0x20 Zadanie1 ARM RAM Release/main.o
-                0x00000000002015a8                menu_3
+                0x0000000000201568                menu_1_1
+ .data.menu_1_2
+                0x0000000000201588       0x20 Zadanie1 ARM RAM Release/main.o
+                0x0000000000201588                menu_1_2
+ .data.menu_1_3
+                0x00000000002015a8       0x20 Zadanie1 ARM RAM Release/main.o
+                0x00000000002015a8                menu_1_3
+ .data.menu_2   0x00000000002015c8       0x20 Zadanie1 ARM RAM Release/main.o
+                0x00000000002015c8                menu_2
+ .data.menu_3   0x00000000002015e8       0x20 Zadanie1 ARM RAM Release/main.o
+                0x00000000002015e8                menu_3
  .data.menu_3_1
-                0x00000000002015c8       0x20 Zadanie1 ARM RAM Release/main.o
-                0x00000000002015c8                menu_3_1
- .data.menu_3_2
-                0x00000000002015e8       0x20 Zadanie1 ARM RAM Release/main.o
-                0x00000000002015e8                menu_3_2
- .data.menu_3_3
                 0x0000000000201608       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201608                menu_3_3
- .data.menu_3_4
+                0x0000000000201608                menu_3_1
+ .data.menu_3_2
                 0x0000000000201628       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201628                menu_3_4
- .data.menu_4   0x0000000000201648       0x20 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201648                menu_4
+                0x0000000000201628                menu_3_2
+ .data.menu_3_3
+                0x0000000000201648       0x20 Zadanie1 ARM RAM Release/main.o
+                0x0000000000201648                menu_3_3
+ .data.menu_3_4
+                0x0000000000201668       0x20 Zadanie1 ARM RAM Release/main.o
+                0x0000000000201668                menu_3_4
+ .data.menu_4   0x0000000000201688       0x20 Zadanie1 ARM RAM Release/main.o
+                0x0000000000201688                menu_4
  .data.sub_menu_1_texts
-                0x0000000000201668       0x10 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201668                sub_menu_1_texts
+                0x00000000002016a8       0x10 Zadanie1 ARM RAM Release/main.o
+                0x00000000002016a8                sub_menu_1_texts
  .data.sub_menu_3_texts
-                0x0000000000201678       0x14 Zadanie1 ARM RAM Release/main.o
-                0x0000000000201678                sub_menu_3_texts
-                0x000000000020168c                __data_end__ = (__data_start__ + SIZEOF (.data))
+                0x00000000002016b8       0x14 Zadanie1 ARM RAM Release/main.o
+                0x00000000002016b8                sub_menu_3_texts
+                0x00000000002016cc                __data_end__ = (__data_start__ + SIZEOF (.data))
                 0x000000000000019c                __data_size__ = SIZEOF (.data)
-                0x000000000020168c                __data_load_end__ = __data_end__
+                0x00000000002016cc                __data_load_end__ = __data_end__
 
 .igot.plt       0x0000000100000000        0x0
  .igot.plt      0x0000000100000000        0x0 Zadanie1 ARM RAM Release/crt0.o
                 0x0000000000000001                . = ASSERT (((__data_start__ == __data_end__) || ((__data_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .data is too large to fit in SRAM memory segment)
-                0x000000000020168c                __rodata_load_start__ = ALIGN (__data_end__, 0x4)
+                0x00000000002016cc                __rodata_load_start__ = ALIGN (__data_end__, 0x4)
 
-.rodata         0x000000000020168c     0xd900
-                0x000000000020168c                __rodata_start__ = .
+.rodata         0x00000000002016cc     0xd908
+                0x00000000002016cc                __rodata_start__ = .
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata.about_author.str1.4
-                0x000000000020168c       0x13 Zadanie1 ARM RAM Release/main.o
- *fill*         0x000000000020169f        0x1 
+                0x00000000002016cc       0x13 Zadanie1 ARM RAM Release/main.o
+ *fill*         0x00000000002016df        0x1 
+ .rodata.image_with_text.str1.4
+                0x00000000002016e0        0x6 Zadanie1 ARM RAM Release/main.o
+ *fill*         0x00000000002016e6        0x2 
  .rodata.str1.4
-                0x00000000002016a0       0x90 Zadanie1 ARM RAM Release/main.o
- .rodata        0x0000000000201730        0xc Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x00000000002016e8       0x90 Zadanie1 ARM RAM Release/main.o
+ .rodata        0x0000000000201778        0xc Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
  .rodata.FONT6x8
-                0x000000000020173c      0x308 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x000000000020173c                FONT6x8
+                0x0000000000201784      0x308 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000201784                FONT6x8
  .rodata.FONT8x16
-                0x0000000000201a44      0x610 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000201a44                FONT8x16
+                0x0000000000201a8c      0x610 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x0000000000201a8c                FONT8x16
  .rodata.FONT8x8
-                0x0000000000202054      0x308 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000202054                FONT8x8
- .rodata.bmp    0x000000000020235c     0x6618 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x000000000020235c                bmp
- .rodata.bmp2   0x0000000000208974     0x6618 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x0000000000208974                bmp2
-                0x000000000020ef8c                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
-                0x000000000000d900                __rodata_size__ = SIZEOF (.rodata)
-                0x000000000020ef8c                __rodata_load_end__ = __rodata_end__
+                0x000000000020209c      0x308 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x000000000020209c                FONT8x8
+ .rodata.bmp    0x00000000002023a4     0x6618 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x00000000002023a4                bmp
+ .rodata.bmp2   0x00000000002089bc     0x6618 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x00000000002089bc                bmp2
+                0x000000000020efd4                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
+                0x000000000000d908                __rodata_size__ = SIZEOF (.rodata)
+                0x000000000020efd4                __rodata_load_end__ = __rodata_end__
 
 .rel.dyn        0x0000000000100000        0x0
  .rel.iplt      0x0000000000100000        0x0 Zadanie1 ARM RAM Release/crt0.o
                 0x0000000000000001                . = ASSERT (((__rodata_start__ == __rodata_end__) || ((__rodata_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .rodata is too large to fit in SRAM memory segment)
-                0x000000000020ef8c                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
+                0x000000000020efd4                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
 
-.ARM.exidx      0x000000000020ef8c        0x0
-                0x000000000020ef8c                __ARM.exidx_start__ = .
-                0x000000000020ef8c                __exidx_start = __ARM.exidx_start__
+.ARM.exidx      0x000000000020efd4        0x0
+                0x000000000020efd4                __ARM.exidx_start__ = .
+                0x000000000020efd4                __exidx_start = __ARM.exidx_start__
  *(.ARM.exidx .ARM.exidx.*)
-                0x000000000020ef8c                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
+                0x000000000020efd4                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
                 0x0000000000000000                __ARM.exidx_size__ = SIZEOF (.ARM.exidx)
-                0x000000000020ef8c                __exidx_end = __ARM.exidx_end__
-                0x000000000020ef8c                __ARM.exidx_load_end__ = __ARM.exidx_end__
+                0x000000000020efd4                __exidx_end = __ARM.exidx_end__
+                0x000000000020efd4                __ARM.exidx_load_end__ = __ARM.exidx_end__
                 0x0000000000000001                . = ASSERT (((__ARM.exidx_start__ == __ARM.exidx_end__) || ((__ARM.exidx_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .ARM.exidx is too large to fit in SRAM memory segment)
-                0x000000000020ef8c                __bss_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
+                0x000000000020efd4                __bss_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
 
-.bss            0x000000000020ef8c        0x8
-                0x000000000020ef8c                __bss_start__ = .
+.bss            0x000000000020efd4        0x8
+                0x000000000020efd4                __bss_start__ = .
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss.animation_active
-                0x000000000020ef8c        0x4 Zadanie1 ARM RAM Release/main.o
-                0x000000000020ef8c                animation_active
- .bss.i         0x000000000020ef90        0x4 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
-                0x000000000020ef90                i
+                0x000000000020efd4        0x4 Zadanie1 ARM RAM Release/main.o
+                0x000000000020efd4                animation_active
+ .bss.i         0x000000000020efd8        0x4 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+                0x000000000020efd8                i
  *(COMMON)
-                0x000000000020ef94                __bss_end__ = (__bss_start__ + SIZEOF (.bss))
+                0x000000000020efdc                __bss_end__ = (__bss_start__ + SIZEOF (.bss))
                 0x0000000000000008                __bss_size__ = SIZEOF (.bss)
-                0x000000000020ef94                __bss_load_end__ = __bss_end__
+                0x000000000020efdc                __bss_load_end__ = __bss_end__
                 0x0000000000000001                . = ASSERT (((__bss_start__ == __bss_end__) || ((__bss_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .bss is too large to fit in SRAM memory segment)
-                0x000000000020ef94                __non_init_load_start__ = ALIGN (__bss_end__, 0x4)
+                0x000000000020efdc                __non_init_load_start__ = ALIGN (__bss_end__, 0x4)
 
-.non_init       0x000000000020ef94        0x0
-                0x000000000020ef94                __non_init_start__ = .
+.non_init       0x000000000020efdc        0x0
+                0x000000000020efdc                __non_init_start__ = .
  *(.non_init .non_init.*)
-                0x000000000020ef94                __non_init_end__ = (__non_init_start__ + SIZEOF (.non_init))
+                0x000000000020efdc                __non_init_end__ = (__non_init_start__ + SIZEOF (.non_init))
                 0x0000000000000000                __non_init_size__ = SIZEOF (.non_init)
-                0x000000000020ef94                __non_init_load_end__ = __non_init_end__
+                0x000000000020efdc                __non_init_load_end__ = __non_init_end__
                 0x0000000000000001                . = ASSERT (((__non_init_start__ == __non_init_end__) || ((__non_init_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .non_init is too large to fit in SRAM memory segment)
-                0x000000000020ef98                __heap_load_start__ = ALIGN (__non_init_end__, 0x8)
+                0x000000000020efe0                __heap_load_start__ = ALIGN (__non_init_end__, 0x8)
 
-.heap           0x000000000020ef98      0x400
-                0x000000000020ef98                __heap_start__ = .
+.heap           0x000000000020efe0      0x400
+                0x000000000020efe0                __heap_start__ = .
  *(.heap .heap.*)
-                0x000000000020f398                . = ALIGN (MAX ((__heap_start__ + __HEAPSIZE__), .), 0x8)
- *fill*         0x000000000020ef98      0x400 
-                0x000000000020f398                __heap_end__ = (__heap_start__ + SIZEOF (.heap))
+                0x000000000020f3e0                . = ALIGN (MAX ((__heap_start__ + __HEAPSIZE__), .), 0x8)
+ *fill*         0x000000000020efe0      0x400 
+                0x000000000020f3e0                __heap_end__ = (__heap_start__ + SIZEOF (.heap))
                 0x0000000000000400                __heap_size__ = SIZEOF (.heap)
-                0x000000000020f398                __heap_load_end__ = __heap_end__
+                0x000000000020f3e0                __heap_load_end__ = __heap_end__
                 0x0000000000000001                . = ASSERT (((__heap_start__ == __heap_end__) || ((__heap_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .heap is too large to fit in SRAM memory segment)
-                0x000000000020f398                __stack_load_start__ = ALIGN (__heap_end__, 0x8)
+                0x000000000020f3e0                __stack_load_start__ = ALIGN (__heap_end__, 0x8)
 
-.stack          0x000000000020f398      0x400
-                0x000000000020f398                __stack_start__ = .
+.stack          0x000000000020f3e0      0x400
+                0x000000000020f3e0                __stack_start__ = .
  *(.stack .stack.*)
-                0x000000000020f798                . = ALIGN (MAX ((__stack_start__ + __STACKSIZE__), .), 0x8)
- *fill*         0x000000000020f398      0x400 
-                0x000000000020f798                __stack_end__ = (__stack_start__ + SIZEOF (.stack))
+                0x000000000020f7e0                . = ALIGN (MAX ((__stack_start__ + __STACKSIZE__), .), 0x8)
+ *fill*         0x000000000020f3e0      0x400 
+                0x000000000020f7e0                __stack_end__ = (__stack_start__ + SIZEOF (.stack))
                 0x0000000000000400                __stack_size__ = SIZEOF (.stack)
-                0x000000000020f798                __stack_load_end__ = __stack_end__
+                0x000000000020f7e0                __stack_load_end__ = __stack_end__
                 0x0000000000000001                . = ASSERT (((__stack_start__ == __stack_end__) || ((__stack_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .stack is too large to fit in SRAM memory segment)
-                0x000000000020f798                __stack_irq_load_start__ = ALIGN (__stack_end__, 0x8)
+                0x000000000020f7e0                __stack_irq_load_start__ = ALIGN (__stack_end__, 0x8)
 
-.stack_irq      0x000000000020f798      0x100
-                0x000000000020f798                __stack_irq_start__ = .
+.stack_irq      0x000000000020f7e0      0x100
+                0x000000000020f7e0                __stack_irq_start__ = .
  *(.stack_irq .stack_irq.*)
-                0x000000000020f898                . = ALIGN (MAX ((__stack_irq_start__ + __STACKSIZE_IRQ__), .), 0x8)
- *fill*         0x000000000020f798      0x100 
-                0x000000000020f898                __stack_irq_end__ = (__stack_irq_start__ + SIZEOF (.stack_irq))
+                0x000000000020f8e0                . = ALIGN (MAX ((__stack_irq_start__ + __STACKSIZE_IRQ__), .), 0x8)
+ *fill*         0x000000000020f7e0      0x100 
+                0x000000000020f8e0                __stack_irq_end__ = (__stack_irq_start__ + SIZEOF (.stack_irq))
                 0x0000000000000100                __stack_irq_size__ = SIZEOF (.stack_irq)
-                0x000000000020f898                __stack_irq_load_end__ = __stack_irq_end__
+                0x000000000020f8e0                __stack_irq_load_end__ = __stack_irq_end__
                 0x0000000000000001                . = ASSERT (((__stack_irq_start__ == __stack_irq_end__) || ((__stack_irq_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .stack_irq is too large to fit in SRAM memory segment)
-                0x000000000020f898                __stack_fiq_load_start__ = ALIGN (__stack_irq_end__, 0x8)
+                0x000000000020f8e0                __stack_fiq_load_start__ = ALIGN (__stack_irq_end__, 0x8)
 
-.stack_fiq      0x000000000020f898      0x100
-                0x000000000020f898                __stack_fiq_start__ = .
+.stack_fiq      0x000000000020f8e0      0x100
+                0x000000000020f8e0                __stack_fiq_start__ = .
  *(.stack_fiq .stack_fiq.*)
-                0x000000000020f998                . = ALIGN (MAX ((__stack_fiq_start__ + __STACKSIZE_FIQ__), .), 0x8)
- *fill*         0x000000000020f898      0x100 
-                0x000000000020f998                __stack_fiq_end__ = (__stack_fiq_start__ + SIZEOF (.stack_fiq))
+                0x000000000020f9e0                . = ALIGN (MAX ((__stack_fiq_start__ + __STACKSIZE_FIQ__), .), 0x8)
+ *fill*         0x000000000020f8e0      0x100 
+                0x000000000020f9e0                __stack_fiq_end__ = (__stack_fiq_start__ + SIZEOF (.stack_fiq))
                 0x0000000000000100                __stack_fiq_size__ = SIZEOF (.stack_fiq)
-                0x000000000020f998                __stack_fiq_load_end__ = __stack_fiq_end__
+                0x000000000020f9e0                __stack_fiq_load_end__ = __stack_fiq_end__
                 0x0000000000000001                . = ASSERT (((__stack_fiq_start__ == __stack_fiq_end__) || ((__stack_fiq_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .stack_fiq is too large to fit in SRAM memory segment)
-                0x000000000020f998                __stack_svc_load_start__ = ALIGN (__stack_fiq_end__, 0x8)
+                0x000000000020f9e0                __stack_svc_load_start__ = ALIGN (__stack_fiq_end__, 0x8)
 
-.stack_svc      0x000000000020f998        0x0
-                0x000000000020f998                __stack_svc_start__ = .
+.stack_svc      0x000000000020f9e0        0x0
+                0x000000000020f9e0                __stack_svc_start__ = .
  *(.stack_svc .stack_svc.*)
-                0x000000000020f998                . = ALIGN (MAX ((__stack_svc_start__ + __STACKSIZE_SVC__), .), 0x8)
-                0x000000000020f998                __stack_svc_end__ = (__stack_svc_start__ + SIZEOF (.stack_svc))
+                0x000000000020f9e0                . = ALIGN (MAX ((__stack_svc_start__ + __STACKSIZE_SVC__), .), 0x8)
+                0x000000000020f9e0                __stack_svc_end__ = (__stack_svc_start__ + SIZEOF (.stack_svc))
                 0x0000000000000000                __stack_svc_size__ = SIZEOF (.stack_svc)
-                0x000000000020f998                __stack_svc_load_end__ = __stack_svc_end__
+                0x000000000020f9e0                __stack_svc_load_end__ = __stack_svc_end__
                 0x0000000000000001                . = ASSERT (((__stack_svc_start__ == __stack_svc_end__) || ((__stack_svc_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .stack_svc is too large to fit in SRAM memory segment)
-                0x000000000020f998                __stack_abt_load_start__ = ALIGN (__stack_svc_end__, 0x8)
+                0x000000000020f9e0                __stack_abt_load_start__ = ALIGN (__stack_svc_end__, 0x8)
 
-.stack_abt      0x000000000020f998        0x0
-                0x000000000020f998                __stack_abt_start__ = .
+.stack_abt      0x000000000020f9e0        0x0
+                0x000000000020f9e0                __stack_abt_start__ = .
  *(.stack_abt .stack_abt.*)
-                0x000000000020f998                . = ALIGN (MAX ((__stack_abt_start__ + __STACKSIZE_ABT__), .), 0x8)
-                0x000000000020f998                __stack_abt_end__ = (__stack_abt_start__ + SIZEOF (.stack_abt))
+                0x000000000020f9e0                . = ALIGN (MAX ((__stack_abt_start__ + __STACKSIZE_ABT__), .), 0x8)
+                0x000000000020f9e0                __stack_abt_end__ = (__stack_abt_start__ + SIZEOF (.stack_abt))
                 0x0000000000000000                __stack_abt_size__ = SIZEOF (.stack_abt)
-                0x000000000020f998                __stack_abt_load_end__ = __stack_abt_end__
+                0x000000000020f9e0                __stack_abt_load_end__ = __stack_abt_end__
                 0x0000000000000001                . = ASSERT (((__stack_abt_start__ == __stack_abt_end__) || ((__stack_abt_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .stack_abt is too large to fit in SRAM memory segment)
-                0x000000000020f998                __stack_und_load_start__ = ALIGN (__stack_abt_end__, 0x8)
+                0x000000000020f9e0                __stack_und_load_start__ = ALIGN (__stack_abt_end__, 0x8)
 
-.stack_und      0x000000000020f998        0x0
-                0x000000000020f998                __stack_und_start__ = .
+.stack_und      0x000000000020f9e0        0x0
+                0x000000000020f9e0                __stack_und_start__ = .
  *(.stack_und .stack_und.*)
-                0x000000000020f998                . = ALIGN (MAX ((__stack_und_start__ + __STACKSIZE_UND__), .), 0x8)
-                0x000000000020f998                __stack_und_end__ = (__stack_und_start__ + SIZEOF (.stack_und))
+                0x000000000020f9e0                . = ALIGN (MAX ((__stack_und_start__ + __STACKSIZE_UND__), .), 0x8)
+                0x000000000020f9e0                __stack_und_end__ = (__stack_und_start__ + SIZEOF (.stack_und))
                 0x0000000000000000                __stack_und_size__ = SIZEOF (.stack_und)
-                0x000000000020f998                __stack_und_load_end__ = __stack_und_end__
+                0x000000000020f9e0                __stack_und_load_end__ = __stack_und_end__
                 0x0000000000000001                . = ASSERT (((__stack_und_start__ == __stack_und_end__) || ((__stack_und_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .stack_und is too large to fit in SRAM memory segment)
-                0x000000000020f998                __tbss_load_start__ = ALIGN (__stack_und_end__, 0x4)
+                0x000000000020f9e0                __tbss_load_start__ = ALIGN (__stack_und_end__, 0x4)
 
-.tbss           0x000000000020f998        0x0
-                0x000000000020f998                __tbss_start__ = .
+.tbss           0x000000000020f9e0        0x0
+                0x000000000020f9e0                __tbss_start__ = .
  *(.tbss .tbss.*)
-                0x000000000020f998                __tbss_end__ = (__tbss_start__ + SIZEOF (.tbss))
+                0x000000000020f9e0                __tbss_end__ = (__tbss_start__ + SIZEOF (.tbss))
                 0x0000000000000000                __tbss_size__ = SIZEOF (.tbss)
-                0x000000000020f998                __tbss_load_end__ = __tbss_end__
+                0x000000000020f9e0                __tbss_load_end__ = __tbss_end__
                 0x0000000000000001                . = ASSERT (((__tbss_start__ == __tbss_end__) || ((__tbss_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .tbss is too large to fit in SRAM memory segment)
-                0x000000000020f998                __tdata_load_start__ = ALIGN (__tbss_end__, 0x4)
+                0x000000000020f9e0                __tdata_load_start__ = ALIGN (__tbss_end__, 0x4)
 
-.tdata          0x000000000020f998        0x0
-                0x000000000020f998                __tdata_start__ = .
+.tdata          0x000000000020f9e0        0x0
+                0x000000000020f9e0                __tdata_start__ = .
  *(.tdata .tdata.*)
-                0x000000000020f998                __tdata_end__ = (__tdata_start__ + SIZEOF (.tdata))
+                0x000000000020f9e0                __tdata_end__ = (__tdata_start__ + SIZEOF (.tdata))
                 0x0000000000000000                __tdata_size__ = SIZEOF (.tdata)
-                0x000000000020f998                __tdata_load_end__ = __tdata_end__
+                0x000000000020f9e0                __tdata_load_end__ = __tdata_end__
                 0x0000000000000001                . = ASSERT (((__tdata_start__ == __tdata_end__) || ((__tdata_end__ - __SRAM_segment_start__) <= __SRAM_segment_size__)), error: .tdata is too large to fit in SRAM memory segment)
                 0x0000000000210000                __mmu_load_start__ = ALIGN (__tdata_end__, 0x4000)
 
@@ -2989,7 +2992,7 @@ LOAD linker stubs
  .debug_ranges  0x00000000000000d8       0x78 Zadanie1 ARM RAM Release/main.o
  .debug_ranges  0x0000000000000150       0x90 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
 
-.debug_frame    0x0000000000000000      0x5cc
+.debug_frame    0x0000000000000000      0x5ec
  .debug_frame   0x0000000000000000       0x90 Zadanie1 ARM RAM Release/AIC.o
- .debug_frame   0x0000000000000090      0x238 Zadanie1 ARM RAM Release/main.o
- .debug_frame   0x00000000000002c8      0x304 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o
+ .debug_frame   0x0000000000000090      0x258 Zadanie1 ARM RAM Release/main.o
+ .debug_frame   0x00000000000002e8      0x304 Zadanie1 ARM RAM Release/pcf8833u8_lcd.o

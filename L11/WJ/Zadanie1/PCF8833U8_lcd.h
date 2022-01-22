@@ -159,6 +159,10 @@ extern "C" {
 //   #define EPSRRD2   0x7D      // Read register 2
 //   #define NOP       0x25      // NOP instruction
 
+/*  Funkcja do wyœwietlania obrazu na ekranie LCD
+*   num - numer obrazu (1 lub 2)
+*   Nic nie zwraca
+*/
 void show_photo(int num);
 
 void Backlight(unsigned char state);

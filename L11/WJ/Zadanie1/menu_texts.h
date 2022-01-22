@@ -1,6 +1,7 @@
-#pragma once
+#pragma once    // Do³¹cz ten plik tylko raz
 
-const char * main_menu_texts[] = {
+//Tekst manu g³ównego
+char * main_menu_texts[] = {
         "1.Obrazy",
         "2.Obraz z tekstem",
         "3.Figury",
@@ -8,14 +9,16 @@ const char * main_menu_texts[] = {
         NULL
 };
 
-const char * sub_menu_1_texts[] = {
+// Tekst podmenu "Obraz"
+char * sub_menu_1_texts[] = {
         "1.1Obraz 1",
         "1.2.Obraz2",
         "1.3.Animacja",
         NULL
 };
 
-const char * sub_menu_3_texts[] = {
+// Tekst podmenu "Figury"
+char * sub_menu_3_texts[] = {
         "3.1.Kwadrat",
         "3.2.Okrag",
         "3.3.Trojkat",

@@ -55,10 +55,12 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="30" y="61" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="main.c" selected="1" top="21" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="menu_functions.h" selected="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="menu.h" selected="0" top="117" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="menu_texts.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="60" y="120" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="main.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="menu.h" selected="0" top="114" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="menu_functions.h" selected="0" top="54" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="25" y="19" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="menu_texts.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="9" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="pcf8833u8_lcd.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="191" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="PCF8833U8_lcd.h" selected="1" top="153" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="Zadanie1" fileDialogDefaultFilter="*" autoConnectTarget="SEGGER J-Link" buildConfiguration="ARM Flash Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/Jacek/Documents/Studia/Laby/Mikro/L11/WJ/Zadanie1" debugSearchPath="" autoConnectCapabilities="388479"/>
+ <ARMCrossStudioWindow activeProject="Zadanie1" fileDialogDefaultFilter="*" autoConnectTarget="SEGGER J-Link" buildConfiguration="ARM RAM Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/Jacek/Documents/Studia/Laby/Mikro/L11/WJ/Zadanie1" debugSearchPath="" autoConnectCapabilities="388479"/>
 </session>
