@@ -1,0 +1,906 @@
+
+Z1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003c6  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  000003c6  0000043a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .debug_aranges 00000020  00000000  00000000  0000043e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 00000077  00000000  00000000  0000045e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   00000677  00000000  00000000  000004d5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000149  00000000  00000000  00000b4c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000004ec  00000000  00000000  00000c95  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  00000070  00000000  00000000  00001184  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    000000fc  00000000  00000000  000011f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000500  00000000  00000000  000012f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 000001b0  00000000  00000000  000017f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e6 ec       	ldi	r30, 0xC6	; 198
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a4 36       	cpi	r26, 0x64	; 100
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+  76:	0e 94 d3 01 	call	0x3a6	; 0x3a6 <main>
+  7a:	0c 94 e1 01 	jmp	0x3c2	; 0x3c2 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <task_3_1>:
+#include <util/delay.h> // Biblioteka do opóŸnieñ
+
+const int half_second = 500, second = 1000; // Zmienne przechowuj¹ce wartoœci opóŸnieñ
+
+void task_3_1()  // Zadanie 3.1
+{
+  82:	0f 93       	push	r16
+  84:	1f 93       	push	r17
+  86:	cf 93       	push	r28
+  88:	df 93       	push	r29
+	PORTA |= 0xc0;  // Ustawiam stan PORTA na pocz¹tek animacji
+  8a:	8b b3       	in	r24, 0x1b	; 27
+  8c:	80 6c       	ori	r24, 0xC0	; 192
+  8e:	8b bb       	out	0x1b, r24	; 27
+	PORTA &= 0xc0;   // Zerujê wszystkie pozosta³e bity
+  90:	8b b3       	in	r24, 0x1b	; 27
+  92:	80 7c       	andi	r24, 0xC0	; 192
+  94:	8b bb       	out	0x1b, r24	; 27
+  96:	a0 e0       	ldi	r26, 0x00	; 0
+  98:	b0 e0       	ldi	r27, 0x00	; 0
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  9a:	09 e1       	ldi	r16, 0x19	; 25
+  9c:	10 e0       	ldi	r17, 0x00	; 0
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+	{
+		for(int j = 7; j > 1; j--)  // Dopóki nie dojdê do koñca linijki zapalam kolejne LED-y
+		{
+			_delay_ms(half_second); // Czekam 0,5s
+			PORTA ^= _BV(j) | _BV(j-2); // Przesuwam animacjê
+  9e:	c1 e0       	ldi	r28, 0x01	; 1
+  a0:	d0 e0       	ldi	r29, 0x00	; 0
+  a2:	4d c0       	rjmp	.+154    	; 0x13e <task_3_1+0xbc>
+  a4:	f8 01       	movw	r30, r16
+  a6:	31 97       	sbiw	r30, 0x01	; 1
+  a8:	f1 f7       	brne	.-4      	; 0xa6 <task_3_1+0x24>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  aa:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  ac:	d9 f7       	brne	.-10     	; 0xa4 <task_3_1+0x22>
+  ae:	8b b3       	in	r24, 0x1b	; 27
+  b0:	62 50       	subi	r22, 0x02	; 2
+  b2:	70 40       	sbci	r23, 0x00	; 0
+  b4:	9e 01       	movw	r18, r28
+  b6:	06 2e       	mov	r0, r22
+  b8:	02 c0       	rjmp	.+4      	; 0xbe <task_3_1+0x3c>
+  ba:	22 0f       	add	r18, r18
+  bc:	33 1f       	adc	r19, r19
+  be:	0a 94       	dec	r0
+  c0:	e2 f7       	brpl	.-8      	; 0xba <task_3_1+0x38>
+  c2:	6e 5f       	subi	r22, 0xFE	; 254
+  c4:	7f 4f       	sbci	r23, 0xFF	; 255
+  c6:	ae 01       	movw	r20, r28
+  c8:	06 2e       	mov	r0, r22
+  ca:	02 c0       	rjmp	.+4      	; 0xd0 <task_3_1+0x4e>
+  cc:	44 0f       	add	r20, r20
+  ce:	55 1f       	adc	r21, r21
+  d0:	0a 94       	dec	r0
+  d2:	e2 f7       	brpl	.-8      	; 0xcc <task_3_1+0x4a>
+  d4:	24 2b       	or	r18, r20
+  d6:	28 27       	eor	r18, r24
+  d8:	2b bb       	out	0x1b, r18	; 27
+{
+	PORTA |= 0xc0;  // Ustawiam stan PORTA na pocz¹tek animacji
+	PORTA &= 0xc0;   // Zerujê wszystkie pozosta³e bity
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+	{
+		for(int j = 7; j > 1; j--)  // Dopóki nie dojdê do koñca linijki zapalam kolejne LED-y
+  da:	61 50       	subi	r22, 0x01	; 1
+  dc:	70 40       	sbci	r23, 0x00	; 0
+  de:	61 30       	cpi	r22, 0x01	; 1
+  e0:	71 05       	cpc	r23, r1
+  e2:	19 f4       	brne	.+6      	; 0xea <task_3_1+0x68>
+  e4:	60 e0       	ldi	r22, 0x00	; 0
+  e6:	70 e0       	ldi	r23, 0x00	; 0
+  e8:	23 c0       	rjmp	.+70     	; 0x130 <task_3_1+0xae>
+  ea:	88 e8       	ldi	r24, 0x88	; 136
+  ec:	93 e1       	ldi	r25, 0x13	; 19
+  ee:	da cf       	rjmp	.-76     	; 0xa4 <task_3_1+0x22>
+  f0:	f8 01       	movw	r30, r16
+  f2:	31 97       	sbiw	r30, 0x01	; 1
+  f4:	f1 f7       	brne	.-4      	; 0xf2 <task_3_1+0x70>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  f6:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  f8:	d9 f7       	brne	.-10     	; 0xf0 <task_3_1+0x6e>
+			PORTA ^= _BV(j) | _BV(j-2); // Przesuwam animacjê
+		}
+		for(int j = 0; j < 6; j++) // Dopóki nie wrócê na pocz¹tek linijki zapalam kolejne LED-y
+		{
+			_delay_ms(half_second); // Czekam 0,5s
+			PORTA ^= _BV(j) | _BV(j+2); // Przesuwam animacjê
+  fa:	8b b3       	in	r24, 0x1b	; 27
+  fc:	6e 5f       	subi	r22, 0xFE	; 254
+  fe:	7f 4f       	sbci	r23, 0xFF	; 255
+ 100:	9e 01       	movw	r18, r28
+ 102:	06 2e       	mov	r0, r22
+ 104:	02 c0       	rjmp	.+4      	; 0x10a <task_3_1+0x88>
+ 106:	22 0f       	add	r18, r18
+ 108:	33 1f       	adc	r19, r19
+ 10a:	0a 94       	dec	r0
+ 10c:	e2 f7       	brpl	.-8      	; 0x106 <task_3_1+0x84>
+ 10e:	62 50       	subi	r22, 0x02	; 2
+ 110:	70 40       	sbci	r23, 0x00	; 0
+ 112:	ae 01       	movw	r20, r28
+ 114:	06 2e       	mov	r0, r22
+ 116:	02 c0       	rjmp	.+4      	; 0x11c <task_3_1+0x9a>
+ 118:	44 0f       	add	r20, r20
+ 11a:	55 1f       	adc	r21, r21
+ 11c:	0a 94       	dec	r0
+ 11e:	e2 f7       	brpl	.-8      	; 0x118 <task_3_1+0x96>
+ 120:	24 2b       	or	r18, r20
+ 122:	28 27       	eor	r18, r24
+ 124:	2b bb       	out	0x1b, r18	; 27
+		for(int j = 7; j > 1; j--)  // Dopóki nie dojdê do koñca linijki zapalam kolejne LED-y
+		{
+			_delay_ms(half_second); // Czekam 0,5s
+			PORTA ^= _BV(j) | _BV(j-2); // Przesuwam animacjê
+		}
+		for(int j = 0; j < 6; j++) // Dopóki nie wrócê na pocz¹tek linijki zapalam kolejne LED-y
+ 126:	6f 5f       	subi	r22, 0xFF	; 255
+ 128:	7f 4f       	sbci	r23, 0xFF	; 255
+ 12a:	66 30       	cpi	r22, 0x06	; 6
+ 12c:	71 05       	cpc	r23, r1
+ 12e:	19 f0       	breq	.+6      	; 0x136 <task_3_1+0xb4>
+ 130:	88 e8       	ldi	r24, 0x88	; 136
+ 132:	93 e1       	ldi	r25, 0x13	; 19
+ 134:	dd cf       	rjmp	.-70     	; 0xf0 <task_3_1+0x6e>
+
+void task_3_1()  // Zadanie 3.1
+{
+	PORTA |= 0xc0;  // Ustawiam stan PORTA na pocz¹tek animacji
+	PORTA &= 0xc0;   // Zerujê wszystkie pozosta³e bity
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+ 136:	11 96       	adiw	r26, 0x01	; 1
+ 138:	a3 30       	cpi	r26, 0x03	; 3
+ 13a:	b1 05       	cpc	r27, r1
+ 13c:	19 f0       	breq	.+6      	; 0x144 <task_3_1+0xc2>
+ 13e:	67 e0       	ldi	r22, 0x07	; 7
+ 140:	70 e0       	ldi	r23, 0x00	; 0
+ 142:	d3 cf       	rjmp	.-90     	; 0xea <task_3_1+0x68>
+		{
+			_delay_ms(half_second); // Czekam 0,5s
+			PORTA ^= _BV(j) | _BV(j+2); // Przesuwam animacjê
+		}
+	}
+}
+ 144:	df 91       	pop	r29
+ 146:	cf 91       	pop	r28
+ 148:	1f 91       	pop	r17
+ 14a:	0f 91       	pop	r16
+ 14c:	08 95       	ret
+
+0000014e <task_3_2>:
+
+void task_3_2()  // Zadanie 3.2
+{
+ 14e:	cf 93       	push	r28
+ 150:	df 93       	push	r29
+	PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+ 152:	df 9a       	sbi	0x1b, 7	; 27
+	PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+ 154:	8b b3       	in	r24, 0x1b	; 27
+ 156:	80 78       	andi	r24, 0x80	; 128
+ 158:	8b bb       	out	0x1b, r24	; 27
+ 15a:	60 e0       	ldi	r22, 0x00	; 0
+ 15c:	70 e0       	ldi	r23, 0x00	; 0
+ 15e:	c9 e1       	ldi	r28, 0x19	; 25
+ 160:	d0 e0       	ldi	r29, 0x00	; 0
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+	{
+		for(int j = 6; j > 3; j--)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+		{
+			_delay_ms(second); // Czekam 1s
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 162:	a1 e0       	ldi	r26, 0x01	; 1
+ 164:	b0 e0       	ldi	r27, 0x00	; 0
+ 166:	36 c0       	rjmp	.+108    	; 0x1d4 <task_3_2+0x86>
+ 168:	fe 01       	movw	r30, r28
+ 16a:	31 97       	sbiw	r30, 0x01	; 1
+ 16c:	f1 f7       	brne	.-4      	; 0x16a <task_3_2+0x1c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 16e:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 170:	d9 f7       	brne	.-10     	; 0x168 <task_3_2+0x1a>
+ 172:	2b b3       	in	r18, 0x1b	; 27
+ 174:	cd 01       	movw	r24, r26
+ 176:	04 2e       	mov	r0, r20
+ 178:	02 c0       	rjmp	.+4      	; 0x17e <task_3_2+0x30>
+ 17a:	88 0f       	add	r24, r24
+ 17c:	99 1f       	adc	r25, r25
+ 17e:	0a 94       	dec	r0
+ 180:	e2 f7       	brpl	.-8      	; 0x17a <task_3_2+0x2c>
+ 182:	28 27       	eor	r18, r24
+ 184:	2b bb       	out	0x1b, r18	; 27
+{
+	PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+	PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+	{
+		for(int j = 6; j > 3; j--)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+ 186:	41 50       	subi	r20, 0x01	; 1
+ 188:	50 40       	sbci	r21, 0x00	; 0
+ 18a:	43 30       	cpi	r20, 0x03	; 3
+ 18c:	51 05       	cpc	r21, r1
+ 18e:	19 f4       	brne	.+6      	; 0x196 <task_3_2+0x48>
+ 190:	44 e0       	ldi	r20, 0x04	; 4
+ 192:	50 e0       	ldi	r21, 0x00	; 0
+ 194:	17 c0       	rjmp	.+46     	; 0x1c4 <task_3_2+0x76>
+ 196:	80 e1       	ldi	r24, 0x10	; 16
+ 198:	97 e2       	ldi	r25, 0x27	; 39
+ 19a:	e6 cf       	rjmp	.-52     	; 0x168 <task_3_2+0x1a>
+ 19c:	fe 01       	movw	r30, r28
+ 19e:	31 97       	sbiw	r30, 0x01	; 1
+ 1a0:	f1 f7       	brne	.-4      	; 0x19e <task_3_2+0x50>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1a2:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1a4:	d9 f7       	brne	.-10     	; 0x19c <task_3_2+0x4e>
+			PORTA ^= _BV(j); // Przesuwam animacjê
+		}
+		for(int j = 4; j < 7; j++) // Dopóki nie wrócê do punktu z którego zacz¹³em gaszê kolejne LED-y
+		{
+			_delay_ms(second); // Czekam 1s
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 1a6:	2b b3       	in	r18, 0x1b	; 27
+ 1a8:	cd 01       	movw	r24, r26
+ 1aa:	04 2e       	mov	r0, r20
+ 1ac:	02 c0       	rjmp	.+4      	; 0x1b2 <task_3_2+0x64>
+ 1ae:	88 0f       	add	r24, r24
+ 1b0:	99 1f       	adc	r25, r25
+ 1b2:	0a 94       	dec	r0
+ 1b4:	e2 f7       	brpl	.-8      	; 0x1ae <task_3_2+0x60>
+ 1b6:	28 27       	eor	r18, r24
+ 1b8:	2b bb       	out	0x1b, r18	; 27
+		for(int j = 6; j > 3; j--)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+		{
+			_delay_ms(second); // Czekam 1s
+			PORTA ^= _BV(j); // Przesuwam animacjê
+		}
+		for(int j = 4; j < 7; j++) // Dopóki nie wrócê do punktu z którego zacz¹³em gaszê kolejne LED-y
+ 1ba:	4f 5f       	subi	r20, 0xFF	; 255
+ 1bc:	5f 4f       	sbci	r21, 0xFF	; 255
+ 1be:	47 30       	cpi	r20, 0x07	; 7
+ 1c0:	51 05       	cpc	r21, r1
+ 1c2:	19 f0       	breq	.+6      	; 0x1ca <task_3_2+0x7c>
+ 1c4:	80 e1       	ldi	r24, 0x10	; 16
+ 1c6:	97 e2       	ldi	r25, 0x27	; 39
+ 1c8:	e9 cf       	rjmp	.-46     	; 0x19c <task_3_2+0x4e>
+
+void task_3_2()  // Zadanie 3.2
+{
+	PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+	PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+ 1ca:	6f 5f       	subi	r22, 0xFF	; 255
+ 1cc:	7f 4f       	sbci	r23, 0xFF	; 255
+ 1ce:	63 30       	cpi	r22, 0x03	; 3
+ 1d0:	71 05       	cpc	r23, r1
+ 1d2:	19 f0       	breq	.+6      	; 0x1da <task_3_2+0x8c>
+ 1d4:	46 e0       	ldi	r20, 0x06	; 6
+ 1d6:	50 e0       	ldi	r21, 0x00	; 0
+ 1d8:	de cf       	rjmp	.-68     	; 0x196 <task_3_2+0x48>
+		{
+			_delay_ms(second); // Czekam 1s
+			PORTA ^= _BV(j); // Przesuwam animacjê
+		}
+	}
+}
+ 1da:	df 91       	pop	r29
+ 1dc:	cf 91       	pop	r28
+ 1de:	08 95       	ret
+
+000001e0 <task_3_3>:
+
+void task_3_3()  // Zadanie 3.3
+{
+ 1e0:	cf 93       	push	r28
+ 1e2:	df 93       	push	r29
+ 1e4:	60 e0       	ldi	r22, 0x00	; 0
+ 1e6:	70 e0       	ldi	r23, 0x00	; 0
+ 1e8:	a9 e1       	ldi	r26, 0x19	; 25
+ 1ea:	b0 e0       	ldi	r27, 0x00	; 0
+		PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+		PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+		_delay_ms(second); // Czekam 1s
+		for(int j = 6; j > -1; j--)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 1ec:	c1 e0       	ldi	r28, 0x01	; 1
+ 1ee:	d0 e0       	ldi	r29, 0x00	; 0
+
+void task_3_3()  // Zadanie 3.3
+{
+	for(int i=0; i < 3; i++) // Wykonujê 3 powtórzenia
+	{
+		PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+ 1f0:	df 9a       	sbi	0x1b, 7	; 27
+		PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+ 1f2:	8b b3       	in	r24, 0x1b	; 27
+ 1f4:	80 78       	andi	r24, 0x80	; 128
+ 1f6:	8b bb       	out	0x1b, r24	; 27
+ 1f8:	80 e1       	ldi	r24, 0x10	; 16
+ 1fa:	97 e2       	ldi	r25, 0x27	; 39
+ 1fc:	fd 01       	movw	r30, r26
+ 1fe:	31 97       	sbiw	r30, 0x01	; 1
+ 200:	f1 f7       	brne	.-4      	; 0x1fe <task_3_3+0x1e>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 202:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 204:	d9 f7       	brne	.-10     	; 0x1fc <task_3_3+0x1c>
+ 206:	46 e0       	ldi	r20, 0x06	; 6
+ 208:	50 e0       	ldi	r21, 0x00	; 0
+		_delay_ms(second); // Czekam 1s
+		for(int j = 6; j > -1; j--)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 20a:	2b b3       	in	r18, 0x1b	; 27
+ 20c:	ce 01       	movw	r24, r28
+ 20e:	04 2e       	mov	r0, r20
+ 210:	02 c0       	rjmp	.+4      	; 0x216 <task_3_3+0x36>
+ 212:	88 0f       	add	r24, r24
+ 214:	99 1f       	adc	r25, r25
+ 216:	0a 94       	dec	r0
+ 218:	e2 f7       	brpl	.-8      	; 0x212 <task_3_3+0x32>
+ 21a:	28 27       	eor	r18, r24
+ 21c:	2b bb       	out	0x1b, r18	; 27
+ 21e:	80 e1       	ldi	r24, 0x10	; 16
+ 220:	97 e2       	ldi	r25, 0x27	; 39
+ 222:	fd 01       	movw	r30, r26
+ 224:	31 97       	sbiw	r30, 0x01	; 1
+ 226:	f1 f7       	brne	.-4      	; 0x224 <task_3_3+0x44>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 228:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 22a:	d9 f7       	brne	.-10     	; 0x222 <task_3_3+0x42>
+	for(int i=0; i < 3; i++) // Wykonujê 3 powtórzenia
+	{
+		PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+		PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+		_delay_ms(second); // Czekam 1s
+		for(int j = 6; j > -1; j--)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+ 22c:	41 50       	subi	r20, 0x01	; 1
+ 22e:	50 40       	sbci	r21, 0x00	; 0
+ 230:	8f ef       	ldi	r24, 0xFF	; 255
+ 232:	4f 3f       	cpi	r20, 0xFF	; 255
+ 234:	58 07       	cpc	r21, r24
+ 236:	49 f7       	brne	.-46     	; 0x20a <task_3_3+0x2a>
+	}
+}
+
+void task_3_3()  // Zadanie 3.3
+{
+	for(int i=0; i < 3; i++) // Wykonujê 3 powtórzenia
+ 238:	6f 5f       	subi	r22, 0xFF	; 255
+ 23a:	7f 4f       	sbci	r23, 0xFF	; 255
+ 23c:	63 30       	cpi	r22, 0x03	; 3
+ 23e:	71 05       	cpc	r23, r1
+ 240:	b9 f6       	brne	.-82     	; 0x1f0 <task_3_3+0x10>
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+			_delay_ms(second); // Czekam 1s
+		}
+	}
+}
+ 242:	df 91       	pop	r29
+ 244:	cf 91       	pop	r28
+ 246:	08 95       	ret
+
+00000248 <task_3_4>:
+
+void task_3_4()  // Zadanie 3.4
+{
+ 248:	cf 93       	push	r28
+ 24a:	df 93       	push	r29
+ 24c:	60 e0       	ldi	r22, 0x00	; 0
+ 24e:	70 e0       	ldi	r23, 0x00	; 0
+ 250:	a9 e1       	ldi	r26, 0x19	; 25
+ 252:	b0 e0       	ldi	r27, 0x00	; 0
+		PORTA |= 0x08;  // Ustawiam stan PORTA na pocz¹tek animacji
+		PORTA &= 0x08;   // Zerujê wszystkie pozosta³e bity
+		_delay_ms(second); // Czekam 1s
+		for(int j = 2; j > -1; j--)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 254:	c1 e0       	ldi	r28, 0x01	; 1
+ 256:	d0 e0       	ldi	r29, 0x00	; 0
+			_delay_ms(second); // Czekam 1s
+		}
+		PORTA ^= 0x1f;  //Odwracam zapalone LED-y w celu przejœcia do kolejnego kroku animacji
+ 258:	3f e1       	ldi	r19, 0x1F	; 31
+
+void task_3_4()  // Zadanie 3.4
+{
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+	{
+		PORTA |= 0x08;  // Ustawiam stan PORTA na pocz¹tek animacji
+ 25a:	db 9a       	sbi	0x1b, 3	; 27
+		PORTA &= 0x08;   // Zerujê wszystkie pozosta³e bity
+ 25c:	8b b3       	in	r24, 0x1b	; 27
+ 25e:	88 70       	andi	r24, 0x08	; 8
+ 260:	8b bb       	out	0x1b, r24	; 27
+ 262:	80 e1       	ldi	r24, 0x10	; 16
+ 264:	97 e2       	ldi	r25, 0x27	; 39
+ 266:	fd 01       	movw	r30, r26
+ 268:	31 97       	sbiw	r30, 0x01	; 1
+ 26a:	f1 f7       	brne	.-4      	; 0x268 <task_3_4+0x20>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 26c:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 26e:	d9 f7       	brne	.-10     	; 0x266 <task_3_4+0x1e>
+ 270:	42 e0       	ldi	r20, 0x02	; 2
+ 272:	50 e0       	ldi	r21, 0x00	; 0
+		_delay_ms(second); // Czekam 1s
+		for(int j = 2; j > -1; j--)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 274:	2b b3       	in	r18, 0x1b	; 27
+ 276:	ce 01       	movw	r24, r28
+ 278:	04 2e       	mov	r0, r20
+ 27a:	02 c0       	rjmp	.+4      	; 0x280 <task_3_4+0x38>
+ 27c:	88 0f       	add	r24, r24
+ 27e:	99 1f       	adc	r25, r25
+ 280:	0a 94       	dec	r0
+ 282:	e2 f7       	brpl	.-8      	; 0x27c <task_3_4+0x34>
+ 284:	28 27       	eor	r18, r24
+ 286:	2b bb       	out	0x1b, r18	; 27
+ 288:	80 e1       	ldi	r24, 0x10	; 16
+ 28a:	97 e2       	ldi	r25, 0x27	; 39
+ 28c:	fd 01       	movw	r30, r26
+ 28e:	31 97       	sbiw	r30, 0x01	; 1
+ 290:	f1 f7       	brne	.-4      	; 0x28e <task_3_4+0x46>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 292:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 294:	d9 f7       	brne	.-10     	; 0x28c <task_3_4+0x44>
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+	{
+		PORTA |= 0x08;  // Ustawiam stan PORTA na pocz¹tek animacji
+		PORTA &= 0x08;   // Zerujê wszystkie pozosta³e bity
+		_delay_ms(second); // Czekam 1s
+		for(int j = 2; j > -1; j--)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+ 296:	41 50       	subi	r20, 0x01	; 1
+ 298:	50 40       	sbci	r21, 0x00	; 0
+ 29a:	8f ef       	ldi	r24, 0xFF	; 255
+ 29c:	4f 3f       	cpi	r20, 0xFF	; 255
+ 29e:	58 07       	cpc	r21, r24
+ 2a0:	49 f7       	brne	.-46     	; 0x274 <task_3_4+0x2c>
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+			_delay_ms(second); // Czekam 1s
+		}
+		PORTA ^= 0x1f;  //Odwracam zapalone LED-y w celu przejœcia do kolejnego kroku animacji
+ 2a2:	8b b3       	in	r24, 0x1b	; 27
+ 2a4:	83 27       	eor	r24, r19
+ 2a6:	8b bb       	out	0x1b, r24	; 27
+ 2a8:	80 e1       	ldi	r24, 0x10	; 16
+ 2aa:	97 e2       	ldi	r25, 0x27	; 39
+ 2ac:	fd 01       	movw	r30, r26
+ 2ae:	31 97       	sbiw	r30, 0x01	; 1
+ 2b0:	f1 f7       	brne	.-4      	; 0x2ae <task_3_4+0x66>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 2b2:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 2b4:	d9 f7       	brne	.-10     	; 0x2ac <task_3_4+0x64>
+ 2b6:	45 e0       	ldi	r20, 0x05	; 5
+ 2b8:	50 e0       	ldi	r21, 0x00	; 0
+
+		_delay_ms(second); // Czekam 1s
+		for(int j = 5; j < 8; j++)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 2ba:	2b b3       	in	r18, 0x1b	; 27
+ 2bc:	ce 01       	movw	r24, r28
+ 2be:	04 2e       	mov	r0, r20
+ 2c0:	02 c0       	rjmp	.+4      	; 0x2c6 <task_3_4+0x7e>
+ 2c2:	88 0f       	add	r24, r24
+ 2c4:	99 1f       	adc	r25, r25
+ 2c6:	0a 94       	dec	r0
+ 2c8:	e2 f7       	brpl	.-8      	; 0x2c2 <task_3_4+0x7a>
+ 2ca:	28 27       	eor	r18, r24
+ 2cc:	2b bb       	out	0x1b, r18	; 27
+ 2ce:	80 e1       	ldi	r24, 0x10	; 16
+ 2d0:	97 e2       	ldi	r25, 0x27	; 39
+ 2d2:	fd 01       	movw	r30, r26
+ 2d4:	31 97       	sbiw	r30, 0x01	; 1
+ 2d6:	f1 f7       	brne	.-4      	; 0x2d4 <task_3_4+0x8c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 2d8:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 2da:	d9 f7       	brne	.-10     	; 0x2d2 <task_3_4+0x8a>
+			_delay_ms(second); // Czekam 1s
+		}
+		PORTA ^= 0x1f;  //Odwracam zapalone LED-y w celu przejœcia do kolejnego kroku animacji
+
+		_delay_ms(second); // Czekam 1s
+		for(int j = 5; j < 8; j++)  // Dopóki nie dojdê do jednego z koñców linijki zapalam kolejne LED-y
+ 2dc:	4f 5f       	subi	r20, 0xFF	; 255
+ 2de:	5f 4f       	sbci	r21, 0xFF	; 255
+ 2e0:	48 30       	cpi	r20, 0x08	; 8
+ 2e2:	51 05       	cpc	r21, r1
+ 2e4:	51 f7       	brne	.-44     	; 0x2ba <task_3_4+0x72>
+	}
+}
+
+void task_3_4()  // Zadanie 3.4
+{
+	for(int i=0; i < 3; i++)  // Wykonujê 3 powtórzenia
+ 2e6:	6f 5f       	subi	r22, 0xFF	; 255
+ 2e8:	7f 4f       	sbci	r23, 0xFF	; 255
+ 2ea:	63 30       	cpi	r22, 0x03	; 3
+ 2ec:	71 05       	cpc	r23, r1
+ 2ee:	09 f0       	breq	.+2      	; 0x2f2 <task_3_4+0xaa>
+ 2f0:	b4 cf       	rjmp	.-152    	; 0x25a <task_3_4+0x12>
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+			_delay_ms(second); // Czekam 1s
+		}
+	}
+}
+ 2f2:	df 91       	pop	r29
+ 2f4:	cf 91       	pop	r28
+ 2f6:	08 95       	ret
+
+000002f8 <task_3_5>:
+
+void task_3_5() // Zadanie 3.5
+{
+ 2f8:	cf 93       	push	r28
+ 2fa:	df 93       	push	r29
+ 2fc:	60 e0       	ldi	r22, 0x00	; 0
+ 2fe:	70 e0       	ldi	r23, 0x00	; 0
+ 300:	a9 e1       	ldi	r26, 0x19	; 25
+ 302:	b0 e0       	ldi	r27, 0x00	; 0
+		PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+		PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+		_delay_ms(second); // Czekam 1s
+		for(int j = 6; j > 3; j--)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 304:	c1 e0       	ldi	r28, 0x01	; 1
+ 306:	d0 e0       	ldi	r29, 0x00	; 0
+			_delay_ms(second); // Czekam 1s
+		} 
+		PORTA ^= 0xf1; //Odwracam zapalone LED-y w celu przejœcia do kolejnego kroku animacji
+ 308:	31 ef       	ldi	r19, 0xF1	; 241
+
+void task_3_5() // Zadanie 3.5
+{
+	for(int i=0; i < 3; i++) // Wykonujê 3 powtórzenia
+	{
+		PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+ 30a:	df 9a       	sbi	0x1b, 7	; 27
+		PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+ 30c:	8b b3       	in	r24, 0x1b	; 27
+ 30e:	80 78       	andi	r24, 0x80	; 128
+ 310:	8b bb       	out	0x1b, r24	; 27
+ 312:	80 e1       	ldi	r24, 0x10	; 16
+ 314:	97 e2       	ldi	r25, 0x27	; 39
+ 316:	fd 01       	movw	r30, r26
+ 318:	31 97       	sbiw	r30, 0x01	; 1
+ 31a:	f1 f7       	brne	.-4      	; 0x318 <task_3_5+0x20>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 31c:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 31e:	d9 f7       	brne	.-10     	; 0x316 <task_3_5+0x1e>
+ 320:	46 e0       	ldi	r20, 0x06	; 6
+ 322:	50 e0       	ldi	r21, 0x00	; 0
+		_delay_ms(second); // Czekam 1s
+		for(int j = 6; j > 3; j--)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 324:	2b b3       	in	r18, 0x1b	; 27
+ 326:	ce 01       	movw	r24, r28
+ 328:	04 2e       	mov	r0, r20
+ 32a:	02 c0       	rjmp	.+4      	; 0x330 <task_3_5+0x38>
+ 32c:	88 0f       	add	r24, r24
+ 32e:	99 1f       	adc	r25, r25
+ 330:	0a 94       	dec	r0
+ 332:	e2 f7       	brpl	.-8      	; 0x32c <task_3_5+0x34>
+ 334:	28 27       	eor	r18, r24
+ 336:	2b bb       	out	0x1b, r18	; 27
+ 338:	80 e1       	ldi	r24, 0x10	; 16
+ 33a:	97 e2       	ldi	r25, 0x27	; 39
+ 33c:	fd 01       	movw	r30, r26
+ 33e:	31 97       	sbiw	r30, 0x01	; 1
+ 340:	f1 f7       	brne	.-4      	; 0x33e <task_3_5+0x46>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 342:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 344:	d9 f7       	brne	.-10     	; 0x33c <task_3_5+0x44>
+	for(int i=0; i < 3; i++) // Wykonujê 3 powtórzenia
+	{
+		PORTA |= 0x80;  // Ustawiam stan PORTA na pocz¹tek animacji
+		PORTA &= 0x80;   // Zerujê wszystkie pozosta³e bity
+		_delay_ms(second); // Czekam 1s
+		for(int j = 6; j > 3; j--)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+ 346:	41 50       	subi	r20, 0x01	; 1
+ 348:	50 40       	sbci	r21, 0x00	; 0
+ 34a:	43 30       	cpi	r20, 0x03	; 3
+ 34c:	51 05       	cpc	r21, r1
+ 34e:	51 f7       	brne	.-44     	; 0x324 <task_3_5+0x2c>
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+			_delay_ms(second); // Czekam 1s
+		} 
+		PORTA ^= 0xf1; //Odwracam zapalone LED-y w celu przejœcia do kolejnego kroku animacji
+ 350:	8b b3       	in	r24, 0x1b	; 27
+ 352:	83 27       	eor	r24, r19
+ 354:	8b bb       	out	0x1b, r24	; 27
+ 356:	80 e1       	ldi	r24, 0x10	; 16
+ 358:	97 e2       	ldi	r25, 0x27	; 39
+ 35a:	fd 01       	movw	r30, r26
+ 35c:	31 97       	sbiw	r30, 0x01	; 1
+ 35e:	f1 f7       	brne	.-4      	; 0x35c <task_3_5+0x64>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 360:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 362:	d9 f7       	brne	.-10     	; 0x35a <task_3_5+0x62>
+ 364:	41 e0       	ldi	r20, 0x01	; 1
+ 366:	50 e0       	ldi	r21, 0x00	; 0
+		_delay_ms(second); // Czekam 1s
+		for(int j = 1; j <4; j++)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+ 368:	2b b3       	in	r18, 0x1b	; 27
+ 36a:	ce 01       	movw	r24, r28
+ 36c:	04 2e       	mov	r0, r20
+ 36e:	02 c0       	rjmp	.+4      	; 0x374 <task_3_5+0x7c>
+ 370:	88 0f       	add	r24, r24
+ 372:	99 1f       	adc	r25, r25
+ 374:	0a 94       	dec	r0
+ 376:	e2 f7       	brpl	.-8      	; 0x370 <task_3_5+0x78>
+ 378:	28 27       	eor	r18, r24
+ 37a:	2b bb       	out	0x1b, r18	; 27
+ 37c:	80 e1       	ldi	r24, 0x10	; 16
+ 37e:	97 e2       	ldi	r25, 0x27	; 39
+ 380:	fd 01       	movw	r30, r26
+ 382:	31 97       	sbiw	r30, 0x01	; 1
+ 384:	f1 f7       	brne	.-4      	; 0x382 <task_3_5+0x8a>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 386:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 388:	d9 f7       	brne	.-10     	; 0x380 <task_3_5+0x88>
+			PORTA ^= _BV(j); // Przesuwam animacjê
+			_delay_ms(second); // Czekam 1s
+		} 
+		PORTA ^= 0xf1; //Odwracam zapalone LED-y w celu przejœcia do kolejnego kroku animacji
+		_delay_ms(second); // Czekam 1s
+		for(int j = 1; j <4; j++)  // Dopóki nie dojdê do œrodka linijki zapalam kolejne LED-y
+ 38a:	4f 5f       	subi	r20, 0xFF	; 255
+ 38c:	5f 4f       	sbci	r21, 0xFF	; 255
+ 38e:	44 30       	cpi	r20, 0x04	; 4
+ 390:	51 05       	cpc	r21, r1
+ 392:	51 f7       	brne	.-44     	; 0x368 <task_3_5+0x70>
+	}
+}
+
+void task_3_5() // Zadanie 3.5
+{
+	for(int i=0; i < 3; i++) // Wykonujê 3 powtórzenia
+ 394:	6f 5f       	subi	r22, 0xFF	; 255
+ 396:	7f 4f       	sbci	r23, 0xFF	; 255
+ 398:	63 30       	cpi	r22, 0x03	; 3
+ 39a:	71 05       	cpc	r23, r1
+ 39c:	09 f0       	breq	.+2      	; 0x3a0 <task_3_5+0xa8>
+ 39e:	b5 cf       	rjmp	.-150    	; 0x30a <task_3_5+0x12>
+		{
+			PORTA ^= _BV(j); // Przesuwam animacjê
+			_delay_ms(second); // Czekam 1s
+		}
+	}
+}
+ 3a0:	df 91       	pop	r29
+ 3a2:	cf 91       	pop	r28
+ 3a4:	08 95       	ret
+
+000003a6 <main>:
+
+int main(void)
+{
+	DDRA |= 0xff;  // Ustawiam port A jako wyjœcie
+ 3a6:	8a b3       	in	r24, 0x1a	; 26
+ 3a8:	8f ef       	ldi	r24, 0xFF	; 255
+ 3aa:	8a bb       	out	0x1a, r24	; 26
+    while(1) // Nieskoñczona pêtla
+    {
+		task_3_1(); // Zadanie 3.1
+ 3ac:	0e 94 41 00 	call	0x82	; 0x82 <task_3_1>
+		task_3_2(); // Zadanie 3.2
+ 3b0:	0e 94 a7 00 	call	0x14e	; 0x14e <task_3_2>
+		task_3_3(); // Zadanie 3.3
+ 3b4:	0e 94 f0 00 	call	0x1e0	; 0x1e0 <task_3_3>
+		task_3_4(); // Zadanie 3.4
+ 3b8:	0e 94 24 01 	call	0x248	; 0x248 <task_3_4>
+		task_3_5(); // Zadanie 3.5
+ 3bc:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <task_3_5>
+ 3c0:	f5 cf       	rjmp	.-22     	; 0x3ac <main+0x6>
+
+000003c2 <_exit>:
+ 3c2:	f8 94       	cli
+
+000003c4 <__stop_program>:
+ 3c4:	ff cf       	rjmp	.-2      	; 0x3c4 <__stop_program>

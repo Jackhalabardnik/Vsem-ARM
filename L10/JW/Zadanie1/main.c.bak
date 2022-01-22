@@ -1,0 +1,38 @@
+#include "PIO_library.h"    // DoÅ‚Ä…czam mojÄ… bibliotekÄ™
+#include <ctl_api.h>
+
+#define LCD_BL 20       
+#define PIOB 1          
+#define ENABLE 1        
+#define DISABLE 0    
+
+void timer_przerw() {
+    TC0_SR;   // na pocz¹tku pusty odczyt rejestru statusu - kasowanie flagi przerwania CPCS
+    PIOB_output_negate(LCD_BL);
+}
+
+int main()
+{
+    PIO_clock_enable(ENABLE,PIOB);
+    PIOB_enable(LCD_BL, ENABLE);
+    PIOB_output_enable(LCD_BL, ENABLE);
+
+    PMC_PCER |= PMC_PCER_TC0; 
+
+    TC0_CCR = TC0_CCR_CLKDIS;    //trzeba wy³¹czyæ zegar
+    TC0_IDR = 0xFF;  // wy³¹czyæ wszystkie przerwania strona 421
+    TC0_SR;  //PUSTY ODCZYT
+    TC0_CMR = 4;  //wybieramy preskaler/1024 czyli TIMER_CLOCK5, reset licznika przy porównaniu wartoœci licznika z rejestrem RC
+    TC0_CMR |= 1<<14;
+    TC0_RC=  9375; //ustawienie przyk³adowej wartoœci RC
+    TC0_IER |= 1<<4;   // za³¹czenie Ÿród³a przerwania od porównania wartoœci licznika z rejestrem RC 
+    TC0_CCR = TC0_CCR_CLKEN | TC0_CCR_SWTRG; // za³¹czenie zegara | reset licznika
+
+    //konfiguracja przerwania od TC0
+    ctl_global_interrupts_disable();  //globalne wy³¹czenie przerwañ
+    ctl_set_isr(12,1,CTL_ISR_TRIGGER_FIXED,timer_przerw,0);   // konfiguracja przerwania od timera, powi¹zanie procedury obs³ugi przerwania ze Ÿród³em
+    ctl_unmask_isr(12);   // zezwolenie na przerwania od timera (wy³¹czenie procedury obs³ugi przerwania, czyli programowe nie sprzêtowe)
+    ctl_global_interrupts_enable(); //zezwolenie na globalne przerwania
+
+    while(1);
+}

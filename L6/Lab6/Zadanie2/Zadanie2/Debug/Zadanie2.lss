@@ -1,0 +1,454 @@
+
+Zadanie2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000280  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000002d4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000002d4  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000304  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000088  00000000  00000000  00000340  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000c92  00000000  00000000  000003c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000761  00000000  00000000  0000105a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000540  00000000  00000000  000017bb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000128  00000000  00000000  00001cfc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003a4  00000000  00000000  00001e24  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000005a0  00000000  00000000  000021c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000068  00000000  00000000  00002768  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 e8       	ldi	r30, 0x80	; 128
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 e1 00 	call	0x1c2	; 0x1c2 <main>
+  7a:	0c 94 3e 01 	jmp	0x27c	; 0x27c <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <sendHalfByte>:
+#include "lcd.h"
+
+void sendHalfByte(char data)
+{
+	PORTA |= 0x02; 								// Wysy³am flagê ENABLE
+  82:	9b b3       	in	r25, 0x1b	; 27
+  84:	92 60       	ori	r25, 0x02	; 2
+  86:	9b bb       	out	0x1b, r25	; 27
+	PORTA = (PORTA & 0x0F) | (data & 0xF0);		// Wysy³am pó³ bajta
+  88:	9b b3       	in	r25, 0x1b	; 27
+  8a:	9f 70       	andi	r25, 0x0F	; 15
+  8c:	80 7f       	andi	r24, 0xF0	; 240
+  8e:	89 2b       	or	r24, r25
+  90:	8b bb       	out	0x1b, r24	; 27
+	PORTA &= 0xFD;								// Usuwam flagê ENABLE
+  92:	8b b3       	in	r24, 0x1b	; 27
+  94:	8d 7f       	andi	r24, 0xFD	; 253
+  96:	8b bb       	out	0x1b, r24	; 27
+  98:	08 95       	ret
+
+0000009a <sendByte>:
+}
+
+void sendByte(char data)
+{
+  9a:	cf 93       	push	r28
+  9c:	c8 2f       	mov	r28, r24
+	sendHalfByte(data);							// Wysy³am górn¹ po³owê bajtu
+  9e:	0e 94 41 00 	call	0x82	; 0x82 <sendHalfByte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  a2:	83 ef       	ldi	r24, 0xF3	; 243
+  a4:	91 e0       	ldi	r25, 0x01	; 1
+  a6:	01 97       	sbiw	r24, 0x01	; 1
+  a8:	f1 f7       	brne	.-4      	; 0xa6 <sendByte+0xc>
+  aa:	00 c0       	rjmp	.+0      	; 0xac <sendByte+0x12>
+  ac:	00 00       	nop
+	_delay_ms(2);								// OpóŸnienie w celu wykrycia stanu "0" na pinie ENABLE
+	sendHalfByte(data << 4);					// Wysy³am doln¹ po³owê bajtu
+  ae:	8c 2f       	mov	r24, r28
+  b0:	82 95       	swap	r24
+  b2:	80 7f       	andi	r24, 0xF0	; 240
+  b4:	0e 94 41 00 	call	0x82	; 0x82 <sendHalfByte>
+}
+  b8:	cf 91       	pop	r28
+  ba:	08 95       	ret
+
+000000bc <sendCommand>:
+
+void sendCommand(char data)
+{
+	sendByte(data);								// Wysy³am komendê
+  bc:	0e 94 4d 00 	call	0x9a	; 0x9a <sendByte>
+  c0:	81 ee       	ldi	r24, 0xE1	; 225
+  c2:	94 e0       	ldi	r25, 0x04	; 4
+  c4:	01 97       	sbiw	r24, 0x01	; 1
+  c6:	f1 f7       	brne	.-4      	; 0xc4 <sendCommand+0x8>
+  c8:	00 c0       	rjmp	.+0      	; 0xca <sendCommand+0xe>
+  ca:	00 00       	nop
+  cc:	08 95       	ret
+
+000000ce <sendChar>:
+	_delay_ms(5);								// Czekam na przetworzenie komendy
+}
+
+void sendChar(char data)
+{
+	sendByte(data);								// Wysy³am znak
+  ce:	0e 94 4d 00 	call	0x9a	; 0x9a <sendByte>
+  d2:	83 ef       	ldi	r24, 0xF3	; 243
+  d4:	91 e0       	ldi	r25, 0x01	; 1
+  d6:	01 97       	sbiw	r24, 0x01	; 1
+  d8:	f1 f7       	brne	.-4      	; 0xd6 <sendChar+0x8>
+  da:	00 c0       	rjmp	.+0      	; 0xdc <sendChar+0xe>
+  dc:	00 00       	nop
+  de:	08 95       	ret
+
+000000e0 <LCD_CLEAR>:
+	_delay_ms(2);								// Czekam na wypisanie znaku
+}
+
+void LCD_CLEAR()
+{
+	PORTA &= 0xFE;								// Prze³¹czam LCD w tryb wprowadzania komend
+  e0:	8b b3       	in	r24, 0x1b	; 27
+  e2:	8e 7f       	andi	r24, 0xFE	; 254
+  e4:	8b bb       	out	0x1b, r24	; 27
+  e6:	83 ef       	ldi	r24, 0xF3	; 243
+  e8:	91 e0       	ldi	r25, 0x01	; 1
+  ea:	01 97       	sbiw	r24, 0x01	; 1
+  ec:	f1 f7       	brne	.-4      	; 0xea <LCD_CLEAR+0xa>
+  ee:	00 c0       	rjmp	.+0      	; 0xf0 <LCD_CLEAR+0x10>
+  f0:	00 00       	nop
+	_delay_ms(2);								// OpóŸnienie w celu wykrycia stanu "0" na pinie RS
+	sendCommand(0x01);							// Czyszczê wyœwietlacz
+  f2:	81 e0       	ldi	r24, 0x01	; 1
+  f4:	0e 94 5e 00 	call	0xbc	; 0xbc <sendCommand>
+	PORTA |= 0x01;								// Prze³¹czam LCD w tryb wprowadzania danych
+  f8:	8b b3       	in	r24, 0x1b	; 27
+  fa:	81 60       	ori	r24, 0x01	; 1
+  fc:	8b bb       	out	0x1b, r24	; 27
+  fe:	08 95       	ret
+
+00000100 <LCD_INIT>:
+ 100:	85 ea       	ldi	r24, 0xA5	; 165
+ 102:	9e e0       	ldi	r25, 0x0E	; 14
+ 104:	01 97       	sbiw	r24, 0x01	; 1
+ 106:	f1 f7       	brne	.-4      	; 0x104 <LCD_INIT+0x4>
+ 108:	00 c0       	rjmp	.+0      	; 0x10a <LCD_INIT+0xa>
+ 10a:	00 00       	nop
+
+void LCD_INIT()
+{
+	_delay_ms(15); 								// Czekam a¿ wyœwietlacz LCD zostanie zainicjalizowany
+
+	DDRA |= 0xF3;								// Ustawiam czêœæ linii A
+ 10c:	8a b3       	in	r24, 0x1a	; 26
+ 10e:	83 6f       	ori	r24, 0xF3	; 243
+ 110:	8a bb       	out	0x1a, r24	; 26
+		
+	// Inicjalizacja standardowymi bajtami
+	sendHalfByte(0x30);							
+ 112:	80 e3       	ldi	r24, 0x30	; 48
+ 114:	0e 94 41 00 	call	0x82	; 0x82 <sendHalfByte>
+ 118:	81 ee       	ldi	r24, 0xE1	; 225
+ 11a:	94 e0       	ldi	r25, 0x04	; 4
+ 11c:	01 97       	sbiw	r24, 0x01	; 1
+ 11e:	f1 f7       	brne	.-4      	; 0x11c <LCD_INIT+0x1c>
+ 120:	00 c0       	rjmp	.+0      	; 0x122 <LCD_INIT+0x22>
+ 122:	00 00       	nop
+	_delay_ms(5);								// Czekam zgodnie z dokumentacj¹
+	sendHalfByte(0x30);							
+ 124:	80 e3       	ldi	r24, 0x30	; 48
+ 126:	0e 94 41 00 	call	0x82	; 0x82 <sendHalfByte>
+ 12a:	89 ef       	ldi	r24, 0xF9	; 249
+ 12c:	90 e0       	ldi	r25, 0x00	; 0
+ 12e:	01 97       	sbiw	r24, 0x01	; 1
+ 130:	f1 f7       	brne	.-4      	; 0x12e <LCD_INIT+0x2e>
+ 132:	00 c0       	rjmp	.+0      	; 0x134 <LCD_INIT+0x34>
+ 134:	00 00       	nop
+	_delay_ms(1);
+	sendCommand(0x32);
+ 136:	82 e3       	ldi	r24, 0x32	; 50
+ 138:	0e 94 5e 00 	call	0xbc	; 0xbc <sendCommand>
+	
+	// Inicjalizacja ustawieñ wyœwietlacza
+	sendCommand(0x28);							// Ustawiam tryb 2 linii i znaków 5x8
+ 13c:	88 e2       	ldi	r24, 0x28	; 40
+ 13e:	0e 94 5e 00 	call	0xbc	; 0xbc <sendCommand>
+	sendCommand(0x08);							// Wy³¹czam wyœwietlacz zgodnie z dokumentacj¹
+ 142:	88 e0       	ldi	r24, 0x08	; 8
+ 144:	0e 94 5e 00 	call	0xbc	; 0xbc <sendCommand>
+	sendCommand(0x01);							// Czyszczê wyœwietlacz
+ 148:	81 e0       	ldi	r24, 0x01	; 1
+ 14a:	0e 94 5e 00 	call	0xbc	; 0xbc <sendCommand>
+	sendCommand(0x06);							// Ustawiam kierunek wyprowadzania tekstu i sposób wyprowadzania na wyœwietlacz
+ 14e:	86 e0       	ldi	r24, 0x06	; 6
+ 150:	0e 94 5e 00 	call	0xbc	; 0xbc <sendCommand>
+	sendCommand(0x0C);							// W³¹czam wyœwietlacz i wy³¹czam kursor
+ 154:	8c e0       	ldi	r24, 0x0C	; 12
+ 156:	0e 94 5e 00 	call	0xbc	; 0xbc <sendCommand>
+	PORTA |= 0x01;								// Prze³¹czam LCD w tryb wprowadzania danych
+ 15a:	8b b3       	in	r24, 0x1b	; 27
+ 15c:	81 60       	ori	r24, 0x01	; 1
+ 15e:	8b bb       	out	0x1b, r24	; 27
+ 160:	08 95       	ret
+
+00000162 <LCD_WRITE>:
+}
+
+void LCD_WRITE(char *str) 
+{
+ 162:	cf 93       	push	r28
+ 164:	df 93       	push	r29
+ 166:	ec 01       	movw	r28, r24
+	while(*str)									// Dopóki nie dojdê to null terminatora wypisujê kolejne znaki
+ 168:	03 c0       	rjmp	.+6      	; 0x170 <LCD_WRITE+0xe>
+	{
+		sendChar(*str++);						// Przesuwam siê do kolejnego znaku po wypisaniu go na wyœwietlaczu
+ 16a:	21 96       	adiw	r28, 0x01	; 1
+ 16c:	0e 94 67 00 	call	0xce	; 0xce <sendChar>
+	PORTA |= 0x01;								// Prze³¹czam LCD w tryb wprowadzania danych
+}
+
+void LCD_WRITE(char *str) 
+{
+	while(*str)									// Dopóki nie dojdê to null terminatora wypisujê kolejne znaki
+ 170:	88 81       	ld	r24, Y
+ 172:	81 11       	cpse	r24, r1
+ 174:	fa cf       	rjmp	.-12     	; 0x16a <LCD_WRITE+0x8>
+	{
+		sendChar(*str++);						// Przesuwam siê do kolejnego znaku po wypisaniu go na wyœwietlaczu
+	}
+}
+ 176:	df 91       	pop	r29
+ 178:	cf 91       	pop	r28
+ 17a:	08 95       	ret
+
+0000017c <show_number>:
+#include <avr/io.h>
+#include "lcd.h"
+
+void show_number(int num)		// funkcja wyœwietlaj¹ca numer
+{
+ 17c:	0f 93       	push	r16
+ 17e:	1f 93       	push	r17
+ 180:	cf 93       	push	r28
+ 182:	df 93       	push	r29
+ 184:	00 d0       	rcall	.+0      	; 0x186 <show_number+0xa>
+ 186:	00 d0       	rcall	.+0      	; 0x188 <show_number+0xc>
+ 188:	1f 92       	push	r1
+ 18a:	cd b7       	in	r28, 0x3d	; 61
+ 18c:	de b7       	in	r29, 0x3e	; 62
+ 18e:	8c 01       	movw	r16, r24
+	LCD_CLEAR();				// czyszczê wyœwietlacz
+ 190:	0e 94 70 00 	call	0xe0	; 0xe0 <LCD_CLEAR>
+	char buffer[5];				// tworzê bufor dla funkcji itoa
+	itoa(num, buffer, 10);		// przetwarzam kod klawisza na ci¹g znaków
+ 194:	4a e0       	ldi	r20, 0x0A	; 10
+ 196:	50 e0       	ldi	r21, 0x00	; 0
+ 198:	be 01       	movw	r22, r28
+ 19a:	6f 5f       	subi	r22, 0xFF	; 255
+ 19c:	7f 4f       	sbci	r23, 0xFF	; 255
+ 19e:	c8 01       	movw	r24, r16
+ 1a0:	0e 94 fe 00 	call	0x1fc	; 0x1fc <itoa>
+	buffer[4]= '\0';			// dodajê pusty znak na koniec ¿eby utworzyæ poprawny ci¹g znaków w C
+ 1a4:	1d 82       	std	Y+5, r1	; 0x05
+	LCD_WRITE(buffer);			// wyœwietlam znak
+ 1a6:	ce 01       	movw	r24, r28
+ 1a8:	01 96       	adiw	r24, 0x01	; 1
+ 1aa:	0e 94 b1 00 	call	0x162	; 0x162 <LCD_WRITE>
+}
+ 1ae:	0f 90       	pop	r0
+ 1b0:	0f 90       	pop	r0
+ 1b2:	0f 90       	pop	r0
+ 1b4:	0f 90       	pop	r0
+ 1b6:	0f 90       	pop	r0
+ 1b8:	df 91       	pop	r29
+ 1ba:	cf 91       	pop	r28
+ 1bc:	1f 91       	pop	r17
+ 1be:	0f 91       	pop	r16
+ 1c0:	08 95       	ret
+
+000001c2 <main>:
+
+
+int main(void)
+{
+	PORTB = 0x01;				// podci¹gam PINB 0 pod zasilanie
+ 1c2:	81 e0       	ldi	r24, 0x01	; 1
+ 1c4:	88 bb       	out	0x18, r24	; 24
+	
+	LCD_INIT();					// Inicjalizuje wyœiwetlacz
+ 1c6:	0e 94 80 00 	call	0x100	; 0x100 <LCD_INIT>
+	show_number(0);
+ 1ca:	80 e0       	ldi	r24, 0x00	; 0
+ 1cc:	90 e0       	ldi	r25, 0x00	; 0
+ 1ce:	0e 94 be 00 	call	0x17c	; 0x17c <show_number>
+	
+	TCCR0 |= 0x07;				// W³¹czam timer ustawiaj¹c zród³o zegara jako zbocze narastaj¹ce
+ 1d2:	83 b7       	in	r24, 0x33	; 51
+ 1d4:	87 60       	ori	r24, 0x07	; 7
+ 1d6:	83 bf       	out	0x33, r24	; 51
+ 1d8:	8f e4       	ldi	r24, 0x4F	; 79
+ 1da:	93 ec       	ldi	r25, 0xC3	; 195
+ 1dc:	01 97       	sbiw	r24, 0x01	; 1
+ 1de:	f1 f7       	brne	.-4      	; 0x1dc <main+0x1a>
+ 1e0:	00 c0       	rjmp	.+0      	; 0x1e2 <main+0x20>
+ 1e2:	00 00       	nop
+	
+	while (1)
+	{
+		_delay_ms(200);					// Czekam 200ms
+		if(TIFR & 0x01)					// Je¿eli wykryjê przepe³nienie to wy³¹czam timer
+ 1e4:	08 b6       	in	r0, 0x38	; 56
+ 1e6:	00 fe       	sbrs	r0, 0
+ 1e8:	04 c0       	rjmp	.+8      	; 0x1f2 <main+0x30>
+		{
+			TCCR0 &= 0xFC;				// Wy³¹czam timer
+ 1ea:	83 b7       	in	r24, 0x33	; 51
+ 1ec:	8c 7f       	andi	r24, 0xFC	; 252
+ 1ee:	83 bf       	out	0x33, r24	; 51
+ 1f0:	f3 cf       	rjmp	.-26     	; 0x1d8 <main+0x16>
+		}
+		else
+		{
+			show_number(TCNT0);			// Je¿eli nie ma przepe³nienia wyœwietlam stan licznika
+ 1f2:	82 b7       	in	r24, 0x32	; 50
+ 1f4:	90 e0       	ldi	r25, 0x00	; 0
+ 1f6:	0e 94 be 00 	call	0x17c	; 0x17c <show_number>
+ 1fa:	ee cf       	rjmp	.-36     	; 0x1d8 <main+0x16>
+
+000001fc <itoa>:
+ 1fc:	45 32       	cpi	r20, 0x25	; 37
+ 1fe:	51 05       	cpc	r21, r1
+ 200:	20 f4       	brcc	.+8      	; 0x20a <itoa+0xe>
+ 202:	42 30       	cpi	r20, 0x02	; 2
+ 204:	10 f0       	brcs	.+4      	; 0x20a <itoa+0xe>
+ 206:	0c 94 09 01 	jmp	0x212	; 0x212 <__itoa_ncheck>
+ 20a:	fb 01       	movw	r30, r22
+ 20c:	10 82       	st	Z, r1
+ 20e:	cb 01       	movw	r24, r22
+ 210:	08 95       	ret
+
+00000212 <__itoa_ncheck>:
+ 212:	bb 27       	eor	r27, r27
+ 214:	4a 30       	cpi	r20, 0x0A	; 10
+ 216:	31 f4       	brne	.+12     	; 0x224 <__itoa_ncheck+0x12>
+ 218:	99 23       	and	r25, r25
+ 21a:	22 f4       	brpl	.+8      	; 0x224 <__itoa_ncheck+0x12>
+ 21c:	bd e2       	ldi	r27, 0x2D	; 45
+ 21e:	90 95       	com	r25
+ 220:	81 95       	neg	r24
+ 222:	9f 4f       	sbci	r25, 0xFF	; 255
+ 224:	0c 94 15 01 	jmp	0x22a	; 0x22a <__utoa_common>
+
+00000228 <__utoa_ncheck>:
+ 228:	bb 27       	eor	r27, r27
+
+0000022a <__utoa_common>:
+ 22a:	fb 01       	movw	r30, r22
+ 22c:	55 27       	eor	r21, r21
+ 22e:	aa 27       	eor	r26, r26
+ 230:	88 0f       	add	r24, r24
+ 232:	99 1f       	adc	r25, r25
+ 234:	aa 1f       	adc	r26, r26
+ 236:	a4 17       	cp	r26, r20
+ 238:	10 f0       	brcs	.+4      	; 0x23e <__utoa_common+0x14>
+ 23a:	a4 1b       	sub	r26, r20
+ 23c:	83 95       	inc	r24
+ 23e:	50 51       	subi	r21, 0x10	; 16
+ 240:	b9 f7       	brne	.-18     	; 0x230 <__utoa_common+0x6>
+ 242:	a0 5d       	subi	r26, 0xD0	; 208
+ 244:	aa 33       	cpi	r26, 0x3A	; 58
+ 246:	08 f0       	brcs	.+2      	; 0x24a <__utoa_common+0x20>
+ 248:	a9 5d       	subi	r26, 0xD9	; 217
+ 24a:	a1 93       	st	Z+, r26
+ 24c:	00 97       	sbiw	r24, 0x00	; 0
+ 24e:	79 f7       	brne	.-34     	; 0x22e <__utoa_common+0x4>
+ 250:	b1 11       	cpse	r27, r1
+ 252:	b1 93       	st	Z+, r27
+ 254:	11 92       	st	Z+, r1
+ 256:	cb 01       	movw	r24, r22
+ 258:	0c 94 2e 01 	jmp	0x25c	; 0x25c <strrev>
+
+0000025c <strrev>:
+ 25c:	dc 01       	movw	r26, r24
+ 25e:	fc 01       	movw	r30, r24
+ 260:	67 2f       	mov	r22, r23
+ 262:	71 91       	ld	r23, Z+
+ 264:	77 23       	and	r23, r23
+ 266:	e1 f7       	brne	.-8      	; 0x260 <strrev+0x4>
+ 268:	32 97       	sbiw	r30, 0x02	; 2
+ 26a:	04 c0       	rjmp	.+8      	; 0x274 <strrev+0x18>
+ 26c:	7c 91       	ld	r23, X
+ 26e:	6d 93       	st	X+, r22
+ 270:	70 83       	st	Z, r23
+ 272:	62 91       	ld	r22, -Z
+ 274:	ae 17       	cp	r26, r30
+ 276:	bf 07       	cpc	r27, r31
+ 278:	c8 f3       	brcs	.-14     	; 0x26c <strrev+0x10>
+ 27a:	08 95       	ret
+
+0000027c <_exit>:
+ 27c:	f8 94       	cli
+
+0000027e <__stop_program>:
+ 27e:	ff cf       	rjmp	.-2      	; 0x27e <__stop_program>

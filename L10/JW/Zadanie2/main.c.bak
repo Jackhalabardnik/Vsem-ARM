@@ -1,0 +1,36 @@
+#include "PIO_library.h"    // Do≈ÇƒÖczam mojƒÖ bibliotekƒô
+#include <ctl_api.h>
+
+#define LCD_BL 20       // Makro dla czytelno≈õci
+#define BUTTON_SW1 24   // Makro dla czytelno≈õci
+#define BUTTON_SW2 25   // Makro dla czytelno≈õci
+#define PIOB 1          // Makro dla czytelno≈õci
+#define ENABLE 1        // Makro dla czytelno≈õci
+#define DISABLE 0       // Makro dla czytelno≈õci
+
+ void button_przerw(){
+    int check = PIOB_ISR;
+    if((check & BUTTON_SW2)!=0)
+    PIOB_CODR = LCD_BL;
+    if((check & BUTTON_SW1)!=0)
+    PIOB_SODR = LCD_BL;
+    }
+
+int main()
+{
+    PIO_clock_enable(ENABLE,PIOB);
+    PIOB_enable(LCD_BL, ENABLE);
+    PIOB_output_enable(LCD_BL, ENABLE);
+   
+    PIOB_IER = 1<<24 | 1<<25;
+
+    //konfiguracja przerwania od TC0
+    ctl_global_interrupts_disable(); //globalne wy≥πczenie przerwaÒ
+    ctl_set_isr(3,1,CTL_ISR_TRIGGER_FIXED,button_przerw,0); // konfiguracja przerwania od timera, powiπzanie procedury obs≥ugi przerwania ze ürÛd≥em - wstawiÊ Peripheral Identifier TC0
+    ctl_unmask_isr(3); // zezwolenie na przerwania od timera (wy≥πczenie procedury obs≥ugi przerwania, czyli programowe nie sprzÍtowe) - wstawiÊ Peripheral Identifier TC0
+    ctl_global_interrupts_enable(); //zezwolenie na globalne przerwania
+
+    while(1);
+
+    return 0;
+}

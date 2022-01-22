@@ -1,0 +1,20 @@
+#include "PIO_library.h"
+
+#define LCD_BL 20
+#define PIOB 1
+#define ENABLE 1
+#define DISABLE 0
+
+int main() {
+  PIO_clock_enable(ENABLE,PIOB);
+  PIOB_enable(LCD_BL, ENABLE);
+  PIOB_output_enable(LCD_BL, ENABLE);
+  
+  while(1) {
+    PIOB_output_state(LCD_BL, ENABLE);
+    time_delay(500);
+    PIOB_output_state(LCD_BL, DISABLE);
+    time_delay(500);
+  }
+  return 0;
+}

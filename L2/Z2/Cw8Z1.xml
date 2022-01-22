@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<HAPSIM>
+   <General>
+      <Build>2005</Build>
+      <Position>
+         <top>378</top>
+         <bottom>711</bottom>
+         <left>536</left>
+         <right>1016</right>
+      </Position>
+      <StayOnTop>1</StayOnTop>
+      <Target>ATmega32</Target>
+   </General>
+   <Views>
+      <LCD>
+         <Name>LCD1</Name>
+         <Position>
+            <top>0</top>
+            <left>0</left>
+         </Position>
+         <DisplayConfig>
+            <columns>16</columns>
+            <rows>2</rows>
+            <bkColor>0xc1fa9d</bkColor>
+            <size>2</size>
+         </DisplayConfig>
+         <PortMapping>
+            <DataPort>
+               <Port>PORTA</Port>
+               <HighNibble>bit 4..7</HighNibble>
+               <LowNibble>bit 0..3</LowNibble>
+            </DataPort>
+            <EnablePin>
+               <Port>PORTB</Port>
+               <Bit>1</Bit>
+            </EnablePin>
+            <RW_Pin>
+               <WriteOnly>1</WriteOnly>
+               <Port>PORTB</Port>
+               <Bit>2</Bit>
+            </RW_Pin>
+            <RS_Pin>
+               <Port>PORTB</Port>
+               <Bit>0</Bit>
+            </RS_Pin>
+         </PortMapping>
+      </LCD>
+   </Views>
+</HAPSIM>

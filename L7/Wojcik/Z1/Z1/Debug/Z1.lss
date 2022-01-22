@@ -1,0 +1,155 @@
+
+Z1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000e0  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000134  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000134  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000164  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000030  00000000  00000000  000001a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000059a  00000000  00000000  000001d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000511  00000000  00000000  0000076a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000021d  00000000  00000000  00000c7b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000006c  00000000  00000000  00000e98  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000002d1  00000000  00000000  00000f04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000092  00000000  00000000  000011d5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000020  00000000  00000000  00001267  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 36 00 	jmp	0x6c	; 0x6c <__vector_1>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 48 00 	jmp	0x90	; 0x90 <__vector_3>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 5a 00 	call	0xb4	; 0xb4 <main>
+  64:	0c 94 6e 00 	jmp	0xdc	; 0xdc <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <__vector_1>:
+#include <avr/io.h>
+#include <avr/interrupt.h>
+ISR(INT0_vect) {					// Przerwanie INT0
+  6c:	1f 92       	push	r1
+  6e:	0f 92       	push	r0
+  70:	0f b6       	in	r0, 0x3f	; 63
+  72:	0f 92       	push	r0
+  74:	11 24       	eor	r1, r1
+  76:	8f 93       	push	r24
+  78:	9f 93       	push	r25
+	PORTA ^= 1 << PA0;				// Zmieniam stan LED0
+  7a:	9b b3       	in	r25, 0x1b	; 27
+  7c:	81 e0       	ldi	r24, 0x01	; 1
+  7e:	89 27       	eor	r24, r25
+  80:	8b bb       	out	0x1b, r24	; 27
+}
+  82:	9f 91       	pop	r25
+  84:	8f 91       	pop	r24
+  86:	0f 90       	pop	r0
+  88:	0f be       	out	0x3f, r0	; 63
+  8a:	0f 90       	pop	r0
+  8c:	1f 90       	pop	r1
+  8e:	18 95       	reti
+
+00000090 <__vector_3>:
+ISR(INT2_vect) {					// Przerwanie INT2
+  90:	1f 92       	push	r1
+  92:	0f 92       	push	r0
+  94:	0f b6       	in	r0, 0x3f	; 63
+  96:	0f 92       	push	r0
+  98:	11 24       	eor	r1, r1
+  9a:	8f 93       	push	r24
+  9c:	9f 93       	push	r25
+	PORTA ^= 1 << PA2;				// Zmieniam stan LED2
+  9e:	9b b3       	in	r25, 0x1b	; 27
+  a0:	84 e0       	ldi	r24, 0x04	; 4
+  a2:	89 27       	eor	r24, r25
+  a4:	8b bb       	out	0x1b, r24	; 27
+}
+  a6:	9f 91       	pop	r25
+  a8:	8f 91       	pop	r24
+  aa:	0f 90       	pop	r0
+  ac:	0f be       	out	0x3f, r0	; 63
+  ae:	0f 90       	pop	r0
+  b0:	1f 90       	pop	r1
+  b2:	18 95       	reti
+
+000000b4 <main>:
+int main(void) {
+	DDRA = 1 << PA0 | 1 << PA2;		// Ustawiam pin 0 i pin 2 PORTA jako wyjœcie
+  b4:	85 e0       	ldi	r24, 0x05	; 5
+  b6:	8a bb       	out	0x1a, r24	; 26
+	PORTB = 1 << PB2;
+  b8:	84 e0       	ldi	r24, 0x04	; 4
+  ba:	88 bb       	out	0x18, r24	; 24
+	PORTD = 1 << PD2;
+  bc:	82 bb       	out	0x12, r24	; 18
+	
+	MCUCR |= 1 << ISC01;			// Ustawiam przerwanie INT0 na zbocze opadaj¹ce
+  be:	85 b7       	in	r24, 0x35	; 53
+  c0:	82 60       	ori	r24, 0x02	; 2
+  c2:	85 bf       	out	0x35, r24	; 53
+	MCUCSR &= ~(1 << ISC2);			// Ustawiam przerwanie INT2 na zbocze opadaj¹ce
+  c4:	84 b7       	in	r24, 0x34	; 52
+  c6:	8f 7b       	andi	r24, 0xBF	; 191
+  c8:	84 bf       	out	0x34, r24	; 52
+	GICR |= 1 << INT0 | 1 << INT2;	// W³¹czam przerwanie INT0 i INT2
+  ca:	8b b7       	in	r24, 0x3b	; 59
+  cc:	80 66       	ori	r24, 0x60	; 96
+  ce:	8b bf       	out	0x3b, r24	; 59
+	GIFR |= 1 << INT0 | 1 << INT2;	// Wywo³anie przerwania INT0 i INT2 kiedy to bêdzie mo¿liwe
+  d0:	8a b7       	in	r24, 0x3a	; 58
+  d2:	80 66       	ori	r24, 0x60	; 96
+  d4:	8a bf       	out	0x3a, r24	; 58
+	sei();							// W³aczenie obs³ugi przerwañ
+  d6:	78 94       	sei
+	while(1) {
+		asm volatile("nop");		// Pêtla g³ówna
+  d8:	00 00       	nop
+  da:	fe cf       	rjmp	.-4      	; 0xd8 <main+0x24>
+
+000000dc <_exit>:
+  dc:	f8 94       	cli
+
+000000de <__stop_program>:
+  de:	ff cf       	rjmp	.-2      	; 0xde <__stop_program>
