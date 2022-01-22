@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string.h>
 #include "menu_functions.h"
 #include "menu_texts.h"
@@ -22,9 +21,9 @@ void display_menu(volatile struct MN *node) {
         if (i == node->node_number) {
             char choosen_pos[BUFFER_SIZE] = ">";
             strcat(choosen_pos, *text);
-            printf("%s\n", choosen_pos);
+            LCDPutStr(choosen_pos, 25+(i*25), 5, SMALL, BLACK, WHITE);
         } else {
-            printf("%s\n", *text);
+            LCDPutStr(*text, 25+(i*25), 5, SMALL, BLACK, WHITE);
         }
         i++;
     }

@@ -2,15 +2,27 @@
 
 volatile struct MN *actual_node = &menu_1;
 
+#define PIOA PMC_PCER_PIOA
+#define PIOA_VEC 2
+#define PIOA_IMPORTANCE 1
+
+#define DELAY 500
+
+void delay(int n) {
+    for (int i = 3000 * n; i > 0; i--) {
+        __asm__("nop");
+    }
+}
+
 enum JOYSTICK {
-    UP = 0,
-    DOWN = 1,
-    LEFT = 2,
-    RIGHT = 3
+    UP = PIOA_PER_P9,
+    DOWN = PIOA_PER_P8,
+    LEFT = PIOA_PER_P7,
+    RIGHT = PIOA_PER_P14
 };
 
-void navigate_menu(enum JOYSTICK choice) {
-    printf("Choice: %d\n", choice);
+void navigate_menu() {
+    enum JOYSTICK choice = PIOA_ISR;
 
     switch (choice) {
         case UP:
@@ -43,6 +55,9 @@ void navigate_menu(enum JOYSTICK choice) {
         case RIGHT:
             if(actual_node->is_inside_action) {
                 actual_node->is_inside_action = 0;
+                if(animation_active) {
+                    animation_active = 0;
+                }
                 display_menu(actual_node);
             }
             else if (actual_node->root) {
@@ -53,15 +68,32 @@ void navigate_menu(enum JOYSTICK choice) {
     }
 }
 
+void interrupt_init() {
+
+  PMC_PCER |= PIOA;
+  PIOA_IER |= UP | DOWN | LEFT | RIGHT;
+
+  ctl_global_interrupts_disable();
+  ctl_set_isr(PIOA_VEC, PIOA_IMPORTANCE, CTL_ISR_TRIGGER_POSITIVE_EDGE, navigate_menu, 0);
+  ctl_unmask_isr(2);
+  ctl_global_interrupts_enable();
+}
+
 int main() {
+
+    InitLCD();
+    LCDClearScreen();
+
+    interrupt_init();
+
     display_menu(actual_node);
-    int choice;
-    printf("Enter choice: 0-up 1-down 2-left 3-right 4-exit: ");
-    scanf("%d", &choice);
-    while (choice != 4) {
-        navigate_menu(choice);
-        printf("Enter choice: 0-up 1-down 2-left 3-right 4-exit: ");
-        scanf("%d", &choice);
+
+    while(1) {
+      if(animation_active) { show_photo(1); }
+      if(animation_active) { delay(DELAY); }
+      if(animation_active) { show_photo(2); }
+      if(animation_active) { delay(DELAY); }
     }
+
     return 0;
 }

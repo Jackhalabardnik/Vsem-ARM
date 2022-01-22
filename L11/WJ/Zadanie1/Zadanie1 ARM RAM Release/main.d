@@ -1,4 +1,4 @@
-Zadanie1\ ARM\ Flash\ Release/main.o: \
+Zadanie1\ ARM\ RAM\ Release/main.o: \
  C:\Users\Jacek\Documents\Studia\Laby\Mikro\Vsem\L11\WJ\Zadanie1\main.c \
  C:\Users\Jacek\Documents\Studia\Laby\Mikro\Vsem\L11\WJ\Zadanie1\menu.h \
  C:/Program\ Files/Rowley\ Associates\ Limited/CrossWorks\ for\ ARM\ 4.8/include/string.h \
